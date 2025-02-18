@@ -39,6 +39,7 @@ public class Ventana extends JFrame {
 		panel1.setLocation(0, 0);
 		panel1.setLayout(null);
 		
+		//Etiquetas
 		JLabel etiqueta1 = new JLabel("Nombre de usuario:");
 		etiqueta1.setSize(150, 30);
 		etiqueta1.setLocation(100, 80);
@@ -68,6 +69,7 @@ public class Ventana extends JFrame {
 		caja.setLocation(100, 220);
 		panel1.add(caja);
 		
+		//Campos de texto
 		JPasswordField contrasena = new JPasswordField();
 		contrasena.setSize(270, 30);
 		contrasena.setLocation(100, 190);
@@ -78,7 +80,7 @@ public class Ventana extends JFrame {
 		usuario.setLocation(100, 110);
 		panel1.add(usuario);
 		
-		
+		//Botones
 		JButton boton = new JButton("Acceder");
 		boton.setBounds(150, 270, 170, 50);
 		boton.setFont(new Font("Arial", Font.BOLD, 18));
