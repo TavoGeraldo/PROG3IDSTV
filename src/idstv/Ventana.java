@@ -1,7 +1,9 @@
 package idstv;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.BorderFactory;
@@ -28,50 +30,42 @@ public class Ventana extends JFrame {
 
 	public Ventana() {
 		this.setTitle("Login");
-		this.setVisible(true);
-		this.setSize(1000, 600);
-		this.setLayout(null);
+		this.setSize(450, 600);
+		// this.setLayout(null);
 		this.setLocationRelativeTo(null);
-
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		this.setResizable(true);
 
-		this.add(this.login());
+		this.add(this.calculadora());
+		// this.add(this.login());
 		// this.add(this.registro());
 		// this.add(this.tabla());
-		
+
 		// this.add(this.registro());
-		
 
-		JMenuBar barra = new JMenuBar();
-		
-		JMenu file = new JMenu("Archivo");
-		barra.add(file);
-		
-		JMenuItem open = new JMenuItem("Abir");
-		file.add(open);
-		
-		JMenuItem item1 = new JMenuItem("Guardar");
-		file.add(item1);
-		
-		JMenuItem item2 = new JMenuItem("Cerrar");
-		file.add(item2);
-		
-		JMenu help = new JMenu("Ayuda");
-		barra.add(help);
-		
-		JMenuItem search = new JMenuItem("Buscar");
-		help.add(item2);
-		
-		JMenuItem i1 = new JMenuItem("Bienvenido");
-		help.add(i1);
-		
-		this.setJMenuBar(barra);
-		this.repaint();
-		this.revalidate();
+		/*
+		 * JMenuBar barra = new JMenuBar();
+		 * 
+		 * JMenu file = new JMenu("Archivo"); barra.add(file);
+		 * 
+		 * JMenuItem open = new JMenuItem("Abir"); file.add(open);
+		 * 
+		 * JMenuItem item1 = new JMenuItem("Guardar"); file.add(item1);
+		 * 
+		 * JMenuItem item2 = new JMenuItem("Cerrar"); file.add(item2);
+		 * 
+		 * JMenu help = new JMenu("Ayuda"); barra.add(help);
+		 * 
+		 * JMenuItem search = new JMenuItem("Buscar"); help.add(item2);
+		 * 
+		 * JMenuItem i1 = new JMenuItem("Bienvenido"); help.add(i1);
+		 * 
+		 * this.setJMenuBar(barra);
+		 */
+		// this.repaint();
+		// this.revalidate();
 
-		
+		this.setVisible(true);
 
 	}
 
@@ -79,7 +73,6 @@ public class Ventana extends JFrame {
 
 		JPanel panel1 = new JPanel();
 
-		
 		panel1.setOpaque(true);
 		panel1.setSize(1000, 600);
 		panel1.setLocation(0, 0);
@@ -134,33 +127,33 @@ public class Ventana extends JFrame {
 		boton.setForeground(Color.WHITE);
 		boton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		panel1.add(boton);
-		
+
 		// Imagen usuario
 		ImageIcon icon = new ImageIcon("user.png");
-		
+
 		// Con esto se redimenciona la imagen para que quede bien
-		Image imagen = icon.getImage(); 
-		Image imagenNueva = imagen.getScaledInstance(30, 30, Image.SCALE_SMOOTH); 
+		Image imagen = icon.getImage();
+		Image imagenNueva = imagen.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		ImageIcon iconoNuevo = new ImageIcon(imagenNueva);
-		//Aqui se crea la imagen ya redimencionada
+		// Aqui se crea la imagen ya redimencionada
 		JLabel iconoUsuario = new JLabel(iconoNuevo);
-		iconoUsuario.setSize(30, 30); 
-		iconoUsuario.setLocation(130, 110); 
+		iconoUsuario.setSize(30, 30);
+		iconoUsuario.setLocation(130, 110);
 		panel1.add(iconoUsuario);
-		
-		//Imagen contraseña
+
+		// Imagen contraseña
 		ImageIcon icon2 = new ImageIcon("padlock.png");
-		//aqui igual se redimenciona
-		Image imagen2 = icon2.getImage(); 
-		Image imagenNueva2 = imagen2.getScaledInstance(30, 30, Image.SCALE_SMOOTH); 
+		// aqui igual se redimenciona
+		Image imagen2 = icon2.getImage();
+		Image imagenNueva2 = imagen2.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		ImageIcon iconoNuevo2 = new ImageIcon(imagenNueva2);
-		
+
 		JLabel iconoPassword = new JLabel(iconoNuevo2);
-		iconoPassword.setSize(30, 30); 
-		iconoPassword.setLocation(130, 190); 
+		iconoPassword.setSize(30, 30);
+		iconoPassword.setLocation(130, 190);
 		panel1.add(iconoPassword);
-		
-		//fondo
+
+		// fondo
 		JLabel fondo = new JLabel(new ImageIcon("fondo.jpg"));
 		fondo.setSize(1000, 600);
 		fondo.setLocation(0, 0);
@@ -347,4 +340,64 @@ public class Ventana extends JFrame {
 		return panel1;
 	}
 
+	public JPanel calculadora() {
+
+		JPanel panelPrincipal = new JPanel(new BorderLayout());
+
+		JTextField campoTexto = new JTextField();
+		campoTexto.setFont(new Font("Arial", Font.BOLD, 70));
+		campoTexto.setHorizontalAlignment(JTextField.RIGHT);
+		panelPrincipal.add(campoTexto, BorderLayout.NORTH);
+
+		JPanel panelBotones = new JPanel(new GridLayout(5, 4, 7, 7));
+
+		JButton botonCE = new JButton("CE");
+		JButton botonv1 = new JButton("");
+		JButton botonv2 = new JButton("");
+		JButton botonv3 = new JButton("");
+		JButton boton7 = new JButton("7");
+		JButton boton8 = new JButton("8");
+		JButton boton9 = new JButton("9");
+		JButton botonDiv = new JButton("/");
+		JButton boton4 = new JButton("4");
+		JButton boton5 = new JButton("5");
+		JButton boton6 = new JButton("6");
+		JButton botonMult = new JButton("*");
+		JButton boton1 = new JButton("1");
+		JButton boton2 = new JButton("2");
+		JButton boton3 = new JButton("3");
+		JButton botonRest = new JButton("-");
+		JButton boton0 = new JButton("0");
+		JButton botonPunto = new JButton(".");
+		JButton botonIgual = new JButton("=");
+		JButton botonSuma = new JButton("+");
+
+		Font botonFont = new Font("Arial", Font.BOLD, 18);
+		JButton[] botones = { 
+				botonCE, botonv1, botonv2, botonv3,
+				boton7, boton8, boton9, botonDiv, 
+				boton4, boton5,boton6, botonMult,
+				boton1, boton2, boton3, botonRest, 
+				boton0, botonPunto, botonIgual, botonSuma 
+				};
+		
+		for (int i = 0; i < botones.length; i++) {
+			botones[i].setFont(botonFont);
+			botones[i].setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+			panelBotones.add(botones[i]);
+		}
+		
+		botonSuma.setBackground(Color.ORANGE);
+		botonRest.setBackground(Color.ORANGE);
+		botonMult.setBackground(Color.ORANGE);
+		botonDiv.setBackground(Color.ORANGE);
+		botonv1.setBackground(Color.lightGray);
+		botonv2.setBackground(Color.lightGray);
+		botonv3.setBackground(Color.lightGray);
+		botonCE.setBackground(Color.lightGray);
+
+		panelPrincipal.add(panelBotones, BorderLayout.CENTER);
+
+		return panelPrincipal;
+	}
 }
