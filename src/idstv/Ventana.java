@@ -64,6 +64,9 @@ public class Ventana extends JFrame {
 		JMenuItem search = new JMenuItem("Buscar");
 		help.add(item2);
 		
+		JMenuItem i1 = new JMenuItem("Bienvenido");
+		help.add(i1);
+		
 		this.setJMenuBar(barra);
 		this.repaint();
 		this.revalidate();
