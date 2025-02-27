@@ -12,6 +12,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -35,13 +38,37 @@ public class Ventana extends JFrame {
 		this.setResizable(true);
 
 		this.add(this.login());
-		this.repaint();
-
 		// this.add(this.registro());
-		// this.repaint();
-
 		// this.add(this.tabla());
-		// this.repaint();
+		
+		// this.add(this.registro());
+		
+
+		JMenuBar barra = new JMenuBar();
+		
+		JMenu file = new JMenu("Archivo");
+		barra.add(file);
+		
+		JMenuItem open = new JMenuItem("Abir");
+		file.add(open);
+		
+		JMenuItem item1 = new JMenuItem("Guardar");
+		file.add(item1);
+		
+		JMenuItem item2 = new JMenuItem("Cerrar");
+		file.add(item2);
+		
+		JMenu help = new JMenu("Ayuda");
+		barra.add(help);
+		
+		JMenuItem search = new JMenuItem("Buscar");
+		help.add(item2);
+		
+		this.setJMenuBar(barra);
+		this.repaint();
+		this.revalidate();
+
+		
 
 	}
 
