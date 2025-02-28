@@ -30,14 +30,18 @@ public class Ventana extends JFrame {
 
 	public Ventana() {
 		this.setTitle("Login");
-		this.setSize(450, 600);
+		this.setSize(1000, 600);
 		// this.setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
+		
+		ImageIcon iconoVentana = new ImageIcon("icono.png");
+		this.setIconImage(iconoVentana.getImage());
 
-		this.add(this.calculadora());
-		// this.add(this.login());
+
+		//this.add(this.calculadora());
+		 this.add(this.login());
 		// this.add(this.registro());
 		// this.add(this.tabla());
 
