@@ -30,7 +30,7 @@ public class Ventana extends JFrame {
 
 	public Ventana() {
 		this.setTitle("Login");
-		this.setSize(1000, 600);
+		this.setSize(500, 600);
 		// this.setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,8 +40,8 @@ public class Ventana extends JFrame {
 		this.setIconImage(iconoVentana.getImage());
 
 
-		//this.add(this.calculadora());
-		 this.add(this.login());
+		this.add(this.calculadora());
+		 //this.add(this.login());
 		// this.add(this.registro());
 		// this.add(this.tabla());
 
@@ -348,57 +348,31 @@ public class Ventana extends JFrame {
 
 		JPanel panelPrincipal = new JPanel(new BorderLayout());
 
-		JTextField campoTexto = new JTextField();
+		JLabel campoTexto = new JLabel("20.00");
 		campoTexto.setFont(new Font("Arial", Font.BOLD, 70));
+		campoTexto.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
 		campoTexto.setHorizontalAlignment(JTextField.RIGHT);
 		panelPrincipal.add(campoTexto, BorderLayout.NORTH);
 
-		JPanel panelBotones = new JPanel(new GridLayout(5, 4, 7, 7));
+		JPanel panelBotones = new JPanel(new GridLayout(5, 4, 7, 10));
+		
 
-		JButton botonCE = new JButton("CE");
-		JButton botonv1 = new JButton("");
-		JButton botonv2 = new JButton("");
-		JButton botonv3 = new JButton("");
-		JButton boton7 = new JButton("7");
-		JButton boton8 = new JButton("8");
-		JButton boton9 = new JButton("9");
-		JButton botonDiv = new JButton("/");
-		JButton boton4 = new JButton("4");
-		JButton boton5 = new JButton("5");
-		JButton boton6 = new JButton("6");
-		JButton botonMult = new JButton("*");
-		JButton boton1 = new JButton("1");
-		JButton boton2 = new JButton("2");
-		JButton boton3 = new JButton("3");
-		JButton botonRest = new JButton("-");
-		JButton boton0 = new JButton("0");
-		JButton botonPunto = new JButton(".");
-		JButton botonIgual = new JButton("=");
-		JButton botonSuma = new JButton("+");
-
-		Font botonFont = new Font("Arial", Font.BOLD, 18);
-		JButton[] botones = { 
-				botonCE, botonv1, botonv2, botonv3,
-				boton7, boton8, boton9, botonDiv, 
-				boton4, boton5,boton6, botonMult,
-				boton1, boton2, boton3, botonRest, 
-				boton0, botonPunto, botonIgual, botonSuma 
+		
+		
+		String[] botones = { 
+				"CE", "", "", "",
+				"7", "8", "9", "/", 
+				"4", "5","6", "*",
+				"1", "2", "3", "-", 
+				"0", ".", "=", "+" 
 				};
 		
-		for (int i = 0; i < botones.length; i++) {
-			botones[i].setFont(botonFont);
-			botones[i].setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-			panelBotones.add(botones[i]);
+		for (String guardarBotones : botones) {
+			 JButton boton = new JButton( guardarBotones);
+			 panelBotones.add(boton);
 		}
 		
-		botonSuma.setBackground(Color.ORANGE);
-		botonRest.setBackground(Color.ORANGE);
-		botonMult.setBackground(Color.ORANGE);
-		botonDiv.setBackground(Color.ORANGE);
-		botonv1.setBackground(Color.lightGray);
-		botonv2.setBackground(Color.lightGray);
-		botonv3.setBackground(Color.lightGray);
-		botonCE.setBackground(Color.lightGray);
+	
 
 		panelPrincipal.add(panelBotones, BorderLayout.CENTER);
 
