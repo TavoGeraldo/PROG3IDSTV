@@ -2,6 +2,8 @@ package idstv;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -29,7 +31,7 @@ import javax.swing.border.BevelBorder;
 public class Ventana extends JFrame {
 
 	public Ventana() {
-		this.setTitle("Login");
+		this.setTitle("calcular interés");
 		this.setSize(500, 600);
 		// this.setLayout(null);
 		this.setLocationRelativeTo(null);
@@ -39,8 +41,8 @@ public class Ventana extends JFrame {
 		ImageIcon iconoVentana = new ImageIcon("icono.png");
 		this.setIconImage(iconoVentana.getImage());
 
-
-		this.add(this.calculadora());
+		this.add(calcularInteres());
+		//this.add(this.calculadora());
 		 //this.add(this.login());
 		// this.add(this.registro());
 		// this.add(this.tabla());
@@ -346,6 +348,8 @@ public class Ventana extends JFrame {
 
 	public JPanel calculadora() {
 
+		
+
 		JPanel panelPrincipal = new JPanel(new BorderLayout());
 
 		JLabel campoTexto = new JLabel("20.00");
@@ -377,5 +381,92 @@ public class Ventana extends JFrame {
 		panelPrincipal.add(panelBotones, BorderLayout.CENTER);
 
 		return panelPrincipal;
+	}
+	
+	public JPanel calcularInteres(){
+		JPanel panel1 = new JPanel(new BorderLayout());
+		
+		JLabel campoTexto = new JLabel("Interés");
+		campoTexto.setFont(new Font("Arial", Font.BOLD, 24));
+		panel1.add(campoTexto, BorderLayout.NORTH);
+		
+		
+		//panel Centro
+        JPanel panel2 = new JPanel();
+        panel2.setBackground(Color.magenta); 
+
+        JLabel texto1 = new JLabel(" Calcular interés");
+        texto1.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 310, Color.magenta));
+
+        texto1.setFont(new Font("Arial", Font.BOLD, 16));
+        panel2.add(texto1, BorderLayout.NORTH);
+		
+		  
+        JPanel contenedor = new JPanel(new GridLayout(4, 2, 5, 5));
+        contenedor.setBackground(Color.magenta);
+
+        JLabel texto4 = new JLabel("Capital:");
+        texto4.setBorder(BorderFactory.createMatteBorder(0, 100, 0, 0, Color.magenta));
+        contenedor.add(texto4);
+        JTextField tew1 = new JTextField("1500");
+        tew1.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 70, Color.magenta));
+        contenedor.add(tew1);
+
+        JLabel texto2 = new JLabel("Tiempo:");
+        texto2.setBorder(BorderFactory.createMatteBorder(0, 100, 0, 0, Color.magenta));
+        contenedor.add(texto2);
+        JTextField tew2 = new JTextField("2");
+        tew2.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 70, Color.magenta));
+        contenedor.add(tew2);
+        
+        JLabel texto3 = new JLabel("Tasa interés:");
+        texto3.setBorder(BorderFactory.createMatteBorder(0, 100, 0, 0, Color.magenta));
+        contenedor.add(texto3);
+        JTextField tew3 = new JTextField("0.1");
+        tew3.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 70, Color.magenta));
+        contenedor.add(tew3);
+
+        
+        JPanel botones = new JPanel();
+        botones.setLayout(new FlowLayout());
+        JButton btnCalcular = new JButton("Calcular");
+        JButton btnCancelar = new JButton("Cancelar");
+        botones.add(btnCalcular);
+        botones.add(btnCancelar);
+
+        contenedor.add(botones);
+        panel2.add(contenedor);
+
+        panel1.add(panel2, BorderLayout.CENTER);
+		
+		
+		
+		
+		//panel asta abajo 
+		JPanel panel3 = new JPanel();
+		panel3.setPreferredSize(new Dimension(400, 150));
+		panel3.setOpaque(true);
+		panel3.setBackground(Color.cyan);
+		panel3.setLayout(new GridLayout(2,2));
+		
+		JLabel t1 = new JLabel("Interés:");
+		t1.setBorder(BorderFactory.createMatteBorder(1, 180, 1, 1, Color.cyan));
+		panel3.add(t1);
+		
+		JTextField tw1 = new JTextField("180.00000");
+		tw1.setBorder(BorderFactory.createMatteBorder(20, 0, 20, 70, Color.cyan));
+		panel3.add(tw1);
+		
+		JLabel t2 = new JLabel("monto:");
+		t2.setBorder(BorderFactory.createMatteBorder(1, 180, 1, 1, Color.cyan));
+		panel3.add(t2);
+		
+		JTextField tw2 = new JTextField("1380.00000");
+		tw2.setBorder(BorderFactory.createMatteBorder(20, 0, 20, 70, Color.cyan));
+		panel3.add(tw2);
+		
+		panel1.add(panel3, BorderLayout.SOUTH);
+		
+		return panel1;
 	}
 }
