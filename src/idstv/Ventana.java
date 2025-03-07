@@ -5,9 +5,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -32,7 +38,7 @@ public class Ventana extends JFrame {
 
 	public Ventana() {
 		this.setTitle("calcular interés");
-		this.setSize(500, 600);
+		this.setSize(800, 600);
 		// this.setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,7 +47,7 @@ public class Ventana extends JFrame {
 		ImageIcon iconoVentana = new ImageIcon("icono.png");
 		this.setIconImage(iconoVentana.getImage());
 
-		this.add(calcularInteres());
+		//this.add(calcularInteres());
 		//this.add(this.calculadora());
 		 //this.add(this.login());
 		// this.add(this.registro());
@@ -68,7 +74,7 @@ public class Ventana extends JFrame {
 		 * 
 		 * this.setJMenuBar(barra);
 		 */
-		// this.repaint();
+		this.repaint();
 		// this.revalidate();
 
 		this.setVisible(true);
@@ -384,6 +390,7 @@ public class Ventana extends JFrame {
 	}
 	
 	public JPanel calcularInteres(){
+
 		JPanel panel1 = new JPanel(new BorderLayout());
 		
 		JLabel campoTexto = new JLabel("Interés");
@@ -468,5 +475,60 @@ public class Ventana extends JFrame {
 		panel1.add(panel3, BorderLayout.SOUTH);
 		
 		return panel1;
+	}
+	
+	
+	@Override
+	public void paint(Graphics g) {
+		
+		super.paint(g);
+		
+		Graphics2D g2d = (Graphics2D) g.create();
+		
+		g2d.drawRect(100, 100, 80, 80);
+		
+		g2d.setColor(Color.YELLOW);
+		
+		g2d.fillRect(150, 150, 80, 80);
+		
+		g2d.setColor(Color.RED);
+		
+		g2d.drawLine(0, 0, 300, 300);
+		
+		g2d.setColor(Color.ORANGE);
+		
+		g2d.drawOval(200, 350, 80, 90);
+		
+		g2d.fillOval(240, 350, 80, 90);
+		
+		try {
+			BufferedImage image = ImageIO.read(new File("vaca.png"));
+			g2d.drawImage(image, 400, 40, null);
+
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		g2d.setColor(Color.GREEN);
+		
+		g2d.setFont(new Font("Arial", Font.BOLD, 70));
+		g2d.drawString("Hola", 500, 500);
+		
+		g2d.drawArc(450, 280, 100, 100, 0, 180);
+		
+		g2d.setColor(Color.BLUE);
+		g2d.fillArc(450, 300, 100, 100, 20, -180);
+		
+		int xs []= {400, 350, 250};
+		int ys []= {300, 200, 250};
+		
+		g2d.drawPolygon(xs, ys, 3);
+		
+		int xs2 []= {450, 250, 250};
+		int ys2 []= {350, 200, 250};
+		
+		g2d.fillPolygon(xs2, ys2, 3);
 	}
 }
