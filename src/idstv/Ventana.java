@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -56,7 +57,7 @@ public class Ventana extends JFrame {
 		 //this.add(this.registro());
 		// this.add(this.tabla());
 
-		this.add(this.registro());
+		//this.add(this.registro());
 
 		/*
 		 * JMenuBar barra = new JMenuBar();
@@ -147,10 +148,13 @@ public class Ventana extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				boolean flag1 = false, flag2 = false;
+				
 				if(usuario.getText().equals("")) {
 					usuario.setBorder(BorderFactory.createLineBorder(Color.RED,3));
 				}else {
 					usuario.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+					flag1= true;
 				}
 				
 				String miContra = new String(contrasena.getPassword());
@@ -159,6 +163,20 @@ public class Ventana extends JFrame {
 					contrasena.setBorder(BorderFactory.createLineBorder(Color.RED,3));
 				}else {
 					contrasena.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+					flag2 = true;
+				}
+				
+				if(flag1 && flag2) {
+					if(usuario.getText().equals("octavio.uabcs.mx")) { 
+						if(miContra.equals("contraseña123")) {
+							JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+					}else
+						JOptionPane.showMessageDialog(null, "Error");
+					}else 
+						JOptionPane.showMessageDialog(null, "Error");
+					
+					
+					
 				}
 			}
 			
@@ -206,7 +224,7 @@ public class Ventana extends JFrame {
 
 		panel2.setBackground(Color.decode("#adb5bd"));
 		panel2.setOpaque(true);
-		panel2.setSize(500, 700);
+		panel2.setSize(1000, 700);
 		panel2.setLocation(0, 0);
 		panel2.setLayout(null);
 
@@ -299,16 +317,23 @@ public class Ventana extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				boolean flag1 = false, flag2 = false;
+				
 				if(usuario.getText().equals("")) {
 					usuario.setBorder(BorderFactory.createLineBorder(Color.RED,3));
 				}else {
 					usuario.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+					flag1 = true;
 				}
 				if(bioArea.getText().equals("")) {
 					bioArea.setBorder(BorderFactory.createLineBorder(Color.RED,3));
 				}else {
 					bioArea.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+					flag1 = true;
 				}
+				
+				
 				
 			}
 		});
