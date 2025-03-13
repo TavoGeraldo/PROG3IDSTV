@@ -10,6 +10,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +41,7 @@ public class Ventana extends JFrame {
 
 	public Ventana() {
 		this.setTitle("Mario");
-		this.setSize(900, 700);
+		this.setSize(1000, 700);
 		// this.setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,11 +52,11 @@ public class Ventana extends JFrame {
 
 		//this.add(calcularInteres());
 		//this.add(this.calculadora());
-		 //this.add(this.login());
-		// this.add(this.registro());
+		 this.add(this.login());
+		 //this.add(this.registro());
 		// this.add(this.tabla());
 
-		// this.add(this.registro());
+		this.add(this.registro());
 
 		/*
 		 * JMenuBar barra = new JMenuBar();
@@ -76,7 +78,7 @@ public class Ventana extends JFrame {
 		 * this.setJMenuBar(barra);
 		 */
 		this.repaint();
-		// this.revalidate();
+		 this.revalidate();
 
 		this.setVisible(true);
 
@@ -87,8 +89,8 @@ public class Ventana extends JFrame {
 		JPanel panel1 = new JPanel();
 
 		panel1.setOpaque(true);
-		panel1.setSize(1000, 600);
-		panel1.setLocation(0, 0);
+		panel1.setSize(500, 700);
+		panel1.setLocation(500, 0);
 		panel1.setLayout(null);
 
 		// Etiquetas
@@ -139,6 +141,30 @@ public class Ventana extends JFrame {
 		boton.setBackground(Color.decode("#00829B"));
 		boton.setForeground(Color.WHITE);
 		boton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		
+		boton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if(usuario.getText().equals("")) {
+					usuario.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+				}else {
+					usuario.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+				}
+				
+				String miContra = new String(contrasena.getPassword());
+				
+				if(miContra.equals("")) {
+					contrasena.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+				}else {
+					contrasena.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+				}
+			}
+			
+			
+		});
+		
 		panel1.add(boton);
 
 		// Imagen usuario
@@ -180,8 +206,8 @@ public class Ventana extends JFrame {
 
 		panel2.setBackground(Color.decode("#adb5bd"));
 		panel2.setOpaque(true);
-		panel2.setSize(500, 500);
-		panel2.setLocation(500, 0);
+		panel2.setSize(500, 700);
+		panel2.setLocation(0, 0);
 		panel2.setLayout(null);
 
 		JLabel etiqueta1 = new JLabel("Nombre de usuario:");
@@ -268,6 +294,25 @@ public class Ventana extends JFrame {
 		boton.setLocation(150, 380);
 		boton.setFont(new Font("Arial", Font.BOLD, 18));
 		boton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		
+		boton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(usuario.getText().equals("")) {
+					usuario.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+				}else {
+					usuario.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+				}
+				if(bioArea.getText().equals("")) {
+					bioArea.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+				}else {
+					bioArea.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+				}
+				
+			}
+		});
+		
 		panel2.add(boton);
 
 		return panel2;
@@ -479,7 +524,7 @@ public class Ventana extends JFrame {
 	}
 	
 	
-	@Override
+/*	@Override
 	public void paint(Graphics g) {
 		
 		super.paint(g);
@@ -675,5 +720,5 @@ public class Ventana extends JFrame {
 			    
 	 			
 				
-	}
+	}*/
 }
