@@ -59,25 +59,54 @@ public class Ventana extends JFrame {
 
 		//this.add(this.registro());
 
-		/*
-		 * JMenuBar barra = new JMenuBar();
-		 * 
-		 * JMenu file = new JMenu("Archivo"); barra.add(file);
-		 * 
-		 * JMenuItem open = new JMenuItem("Abir"); file.add(open);
-		 * 
-		 * JMenuItem item1 = new JMenuItem("Guardar"); file.add(item1);
-		 * 
-		 * JMenuItem item2 = new JMenuItem("Cerrar"); file.add(item2);
-		 * 
-		 * JMenu help = new JMenu("Ayuda"); barra.add(help);
-		 * 
-		 * JMenuItem search = new JMenuItem("Buscar"); help.add(item2);
-		 * 
-		 * JMenuItem i1 = new JMenuItem("Bienvenido"); help.add(i1);
-		 * 
-		 * this.setJMenuBar(barra);
-		 */
+		
+		  JMenuBar barra = new JMenuBar();
+		  
+		  JMenu file = new JMenu("Archivo"); barra.add(file);
+		  
+		  JMenuItem open = new JMenuItem("Abir"); file.add(open);
+		  
+		  JMenuItem item1 = new JMenuItem("Guardar"); file.add(item1);
+		  
+		  JMenuItem item2 = new JMenuItem("Cerrar"); file.add(item2);
+		  
+		  JMenu help = new JMenu("Ayuda"); barra.add(help);
+		  
+		  JMenuItem search = new JMenuItem("Buscar"); help.add(item2);
+		  
+		  JMenuItem i1 = new JMenuItem("Bienvenido"); help.add(i1);
+		  
+		  JMenu cuenta = new JMenu("Cuenta");
+			barra.add(cuenta);
+
+			JMenuItem registro = new JMenuItem("Registrar");
+			
+			registro.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					router("registro");
+					
+				}
+			});
+			
+			cuenta.add(registro);
+
+			JMenuItem datos = new JMenuItem("login");
+			
+			datos.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					router("login");
+					
+				}
+			});
+			
+			cuenta.add(datos);
+		  
+		  this.setJMenuBar(barra);
+		 
 		this.repaint();
 		 this.revalidate();
 
