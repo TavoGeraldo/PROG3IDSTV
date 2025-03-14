@@ -184,6 +184,24 @@ public class Ventana extends JFrame {
 		});
 		
 		panel1.add(boton);
+		
+		JButton irRegistro = new JButton("Ir a registro");
+		irRegistro.setBounds(220, 370, 170, 50);
+		irRegistro.setFont(new Font("Arial", Font.BOLD, 18));
+		irRegistro.setBackground(Color.decode("#00829B"));
+		irRegistro.setForeground(Color.WHITE);
+		irRegistro.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		
+		irRegistro.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("registro");
+				
+			}
+		});
+		
+		panel1.add(irRegistro);
 
 		// Imagen usuario
 		ImageIcon icon = new ImageIcon("user.png");
@@ -339,10 +357,44 @@ public class Ventana extends JFrame {
 		});
 		
 		panel2.add(boton);
+		
+		JButton irLogin = new JButton("Ir al login");
+		irLogin.setBounds(150, 470, 170, 50);
+		irLogin.setFont(new Font("Arial", Font.BOLD, 18));
+		irLogin.setBackground(Color.decode("#00829B"));
+		irLogin.setForeground(Color.WHITE);
+		irLogin.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		
+		irLogin.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("login");
+				
+			}
+		});
+		
+		panel2.add(irLogin);
 
 		return panel2;
 	}
 
+	public void router(String route) {
+		
+		this.getContentPane().removeAll();
+		
+		if (route.equals("registro")) {
+			this.add(this.registro());
+		}
+		
+		if (route.equals("login")) {
+			this.add(this.login());
+		}
+		
+		this.repaint();
+		this.revalidate();
+	}
+	
 	public JPanel tabla() {
 
 		JPanel panel1 = new JPanel();
