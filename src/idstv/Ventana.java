@@ -51,30 +51,104 @@ public class Ventana extends JFrame {
 		ImageIcon iconoVentana = new ImageIcon("icono.png");
 		this.setIconImage(iconoVentana.getImage());
 
-		//this.add(calcularInteres());
-		//this.add(this.calculadora());
+		
 		 this.add(this.login());
-		 //this.add(this.registro());
-		// this.add(this.tabla());
+		 
 
-		//this.add(this.registro());
+		
 
 		
 		  JMenuBar barra = new JMenuBar();
 		  
-		  JMenu file = new JMenu("Archivo"); barra.add(file);
+		  JMenu file = new JMenu("Usuarios"); barra.add(file);
 		  
-		  JMenuItem open = new JMenuItem("Abir"); file.add(open);
+		  JMenuItem alta = new JMenuItem("Alta");
 		  
-		  JMenuItem item1 = new JMenuItem("Guardar"); file.add(item1);
+		  alta.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("alta");
+				
+			}
+		});
 		  
-		  JMenuItem item2 = new JMenuItem("Cerrar"); file.add(item2);
+		  file.add(alta);
 		  
-		  JMenu help = new JMenu("Ayuda"); barra.add(help);
+		  JMenuItem baja = new JMenuItem("Baja");
 		  
-		  JMenuItem search = new JMenuItem("Buscar"); help.add(item2);
+		  baja.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("baja");
+				
+			}
+		});
 		  
-		  JMenuItem i1 = new JMenuItem("Bienvenido"); help.add(i1);
+		  file.add(baja);
+		  
+		  JMenuItem consultar = new JMenuItem("Consultar"); 
+		  
+		  consultar.addActionListener(new ActionListener() {
+				
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("consultar");
+				
+			}
+		});
+		  
+		  file.add(consultar);
+		  
+		  
+		  
+		  
+		  JMenu help = new JMenu("Ayuda"); 
+		  barra.add(help);
+		  
+		  JMenuItem crearUsuario = new JMenuItem("¿Cómo crear un usuario?");
+		  
+		  crearUsuario.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("crear usuario");
+				
+			}
+		});
+		  
+		  help.add(crearUsuario);
+		  
+		  JMenuItem acceder = new JMenuItem("¿Cómo acceder al sistema?");
+		  
+		  acceder.addActionListener(new ActionListener() {
+				
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("acceder");
+				
+			}
+		});
+		  
+		  help.add(acceder);
+		  
+		  JMenuItem olvideContra = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
+		  
+		  olvideContra.addActionListener(new ActionListener() {
+				
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("contraseña olvidada");
+				
+			}
+		});
+		  
+		  help.add(olvideContra);
+		  
+		  
+		  
+		  
 		  
 		  JMenu cuenta = new JMenu("Cuenta");
 			barra.add(cuenta);
@@ -104,7 +178,23 @@ public class Ventana extends JFrame {
 			});
 			
 			cuenta.add(datos);
+			
+			JMenuItem recuperar = new JMenuItem("Recuperación de cuenta");
+			
+			recuperar.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					router("recuperacion");
+					
+				}
+			});
+			
+			cuenta.add(recuperar);
 		  
+			
+			
+			
 		  this.setJMenuBar(barra);
 		 
 		this.repaint();
@@ -407,7 +497,139 @@ public class Ventana extends JFrame {
 
 		return panel2;
 	}
+	
+	public JPanel recuperacion() {
+		
+		JPanel panel1 = new JPanel();
 
+		panel1.setOpaque(true);
+		panel1.setSize(500, 700);
+		panel1.setLocation(500, 0);
+		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setLayout(null);
+
+		// Etiquetas
+		JLabel etiqueta1 = new JLabel("Recuperación de cuenta");
+		etiqueta1.setSize(360, 30);
+		etiqueta1.setLocation(170, 80);
+		etiqueta1.setForeground(Color.BLACK);
+		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
+		panel1.add(etiqueta1);
+		
+		
+		return panel1;
+	}
+	
+	public JPanel alta() {
+		
+		JPanel panel1 = new JPanel();
+
+		panel1.setOpaque(true);
+		panel1.setSize(500, 700);
+		panel1.setLocation(500, 0);
+		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setLayout(null);
+
+		// Etiquetas
+		JLabel etiqueta1 = new JLabel("Alta de cuenta");
+		etiqueta1.setSize(360, 30);
+		etiqueta1.setLocation(170, 80);
+		etiqueta1.setForeground(Color.BLACK);
+		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
+		panel1.add(etiqueta1);
+		
+		
+		return panel1;
+	}
+
+	public JPanel baja() {
+		
+		JPanel panel1 = new JPanel();
+
+		panel1.setOpaque(true);
+		panel1.setSize(500, 700);
+		panel1.setLocation(500, 0);
+		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setLayout(null);
+
+		// Etiquetas
+		JLabel etiqueta1 = new JLabel("baja de cuenta");
+		etiqueta1.setSize(360, 30);
+		etiqueta1.setLocation(170, 80);
+		etiqueta1.setForeground(Color.BLACK);
+		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
+		panel1.add(etiqueta1);
+		
+		
+		return panel1;
+	}
+
+	public JPanel crearUsuario() {
+		
+		JPanel panel1 = new JPanel();
+
+		panel1.setOpaque(true);
+		panel1.setSize(500, 700);
+		panel1.setLocation(500, 0);
+		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setLayout(null);
+
+		// Etiquetas
+		JLabel etiqueta1 = new JLabel("¿Cómo crear un usuario?");
+		etiqueta1.setSize(360, 30);
+		etiqueta1.setLocation(170, 80);
+		etiqueta1.setForeground(Color.BLACK);
+		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
+		panel1.add(etiqueta1);
+		
+		
+		return panel1;
+	}
+
+	public JPanel accederSistema() {
+		
+		JPanel panel1 = new JPanel();
+
+		panel1.setOpaque(true);
+		panel1.setSize(500, 700);
+		panel1.setLocation(500, 0);
+		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setLayout(null);
+
+		// Etiquetas
+		JLabel etiqueta1 = new JLabel(" ¿Cómo acceder al sistema?");
+		etiqueta1.setSize(360, 30);
+		etiqueta1.setLocation(170, 80);
+		etiqueta1.setForeground(Color.BLACK);
+		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
+		panel1.add(etiqueta1);
+		
+		
+		return panel1;
+	}
+	
+	public JPanel olvidoContra() {
+		
+		JPanel panel1 = new JPanel();
+
+		panel1.setOpaque(true);
+		panel1.setSize(500, 700);
+		panel1.setLocation(500, 0);
+		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setLayout(null);
+
+		// Etiquetas
+		JLabel etiqueta1 = new JLabel(" ¿Qué pasa si olvidé mi contraseña?");
+		etiqueta1.setSize(360, 30);
+		etiqueta1.setLocation(170, 80);
+		etiqueta1.setForeground(Color.BLACK);
+		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
+		panel1.add(etiqueta1);
+		
+		
+		return panel1;
+	}
+	
 	public void router(String route) {
 		
 		this.getContentPane().removeAll();
@@ -419,6 +641,36 @@ public class Ventana extends JFrame {
 		if (route.equals("login")) {
 			this.add(this.login());
 		}
+		
+		
+		if (route.equals("recuperacion")) {
+			this.add(this.recuperacion());
+		}
+		
+		if (route.equals("alta")) {
+			this.add(this.alta());
+		}
+		
+		if (route.equals("baja")) {
+			this.add(this.baja());
+		}
+		
+		if (route.equals("consultar")) {
+			this.add(this.tabla());
+		}
+		
+		if (route.equals("crear usuario")) {
+			this.add(this.crearUsuario());
+		}
+		
+		if (route.equals("acceder")) {
+			this.add(this.accederSistema());
+		}
+		
+		if (route.equals("contraseña olvidada")) {
+			this.add(this.olvidoContra());
+		}
+		
 		
 		this.repaint();
 		this.revalidate();
