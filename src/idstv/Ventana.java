@@ -41,8 +41,8 @@ import javax.swing.border.BevelBorder;
 public class Ventana extends JFrame {
 
 	public Ventana() {
-		this.setTitle("Mario");
-		this.setSize(1000, 700);
+		this.setTitle("Login");
+		this.setSize(700, 700);
 		// this.setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -258,7 +258,7 @@ public class Ventana extends JFrame {
 		JButton boton = new JButton("Acceder");
 		boton.setBounds(220, 270, 170, 50);
 		boton.setFont(new Font("Arial", Font.BOLD, 18));
-		boton.setBackground(Color.decode("#00829B"));
+		boton.setBackground(Color.decode("#28a745"));
 		boton.setForeground(Color.WHITE);
 		boton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		
@@ -349,7 +349,7 @@ public class Ventana extends JFrame {
 
 		// fondo
 		JLabel fondo = new JLabel(new ImageIcon("fondo.jpg"));
-		fondo.setSize(1000, 600);
+		fondo.setSize(700, 600);
 		fondo.setLocation(0, 0);
 		panel1.add(fondo);
 
@@ -367,51 +367,51 @@ public class Ventana extends JFrame {
 
 		JLabel etiqueta1 = new JLabel("Nombre de usuario:");
 		etiqueta1.setSize(150, 30);
-		etiqueta1.setLocation(100, 40);
+		etiqueta1.setLocation(180, 40);
 		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 14));
 		panel2.add(etiqueta1);
 
 		JTextField usuario = new JTextField();
 		usuario.setSize(300, 30);
-		usuario.setLocation(100, 70);
+		usuario.setLocation(180, 70);
 		usuario.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		panel2.add(usuario);
 
 		JLabel etiqueta2 = new JLabel("Descripción personal:");
 		etiqueta2.setSize(170, 30);
-		etiqueta2.setLocation(100, 110);
+		etiqueta2.setLocation(180, 110);
 		etiqueta2.setFont(new Font("Georgia", Font.BOLD, 14));
 
 		panel2.add(etiqueta2);
 
 		JTextArea bioArea = new JTextArea();
 		bioArea.setSize(300, 60);
-		bioArea.setLocation(100, 140);
+		bioArea.setLocation(180, 140);
 		bioArea.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 
 		panel2.add(bioArea);
 
 		JLabel etiqueta3 = new JLabel("Preferencias");
 		etiqueta3.setSize(150, 30);
-		etiqueta3.setLocation(190, 210);
+		etiqueta3.setLocation(270, 210);
 		etiqueta3.setFont(new Font("Georgia", Font.BOLD, 14));
 		panel2.add(etiqueta3);
 
 		JCheckBox caja1 = new JCheckBox("Dulce");
 		caja1.setSize(60, 30);
-		caja1.setLocation(100, 240);
+		caja1.setLocation(180, 240);
 		caja1.setBackground(null);
 		panel2.add(caja1);
 
 		JCheckBox caja2 = new JCheckBox("Salado");
 		caja2.setSize(80, 30);
-		caja2.setLocation(180, 240);
+		caja2.setLocation(260, 240);
 		caja2.setBackground(null);
 		panel2.add(caja2);
 
 		JCheckBox caja3 = new JCheckBox("Amargo");
 		caja3.setSize(80, 30);
-		caja3.setLocation(270, 240);
+		caja3.setLocation(350, 240);
 		caja3.setBackground(null);
 		panel2.add(caja3);
 
@@ -419,24 +419,24 @@ public class Ventana extends JFrame {
 		JComboBox colonias = new JComboBox(col);
 		colonias.setSize(300, 30);
 		colonias.setFont(new Font("Georgia", Font.PLAIN, 14));
-		colonias.setLocation(100, 280);
+		colonias.setLocation(180, 280);
 		panel2.add(colonias);
 
 		JLabel etiqueta4 = new JLabel("Términos");
 		etiqueta4.setSize(150, 30);
-		etiqueta4.setLocation(200, 320);
+		etiqueta4.setLocation(280, 320);
 		etiqueta4.setFont(new Font("Georgia", Font.BOLD, 14));
 		panel2.add(etiqueta4);
 
 		JRadioButton aceptar = new JRadioButton("Acepto los términos");
 		aceptar.setSize(150, 30);
-		aceptar.setLocation(100, 340);
+		aceptar.setLocation(180, 340);
 		aceptar.setBackground(null);
 		panel2.add(aceptar);
 
 		JRadioButton noAceptar = new JRadioButton("No acepto los términos");
 		noAceptar.setSize(160, 30);
-		noAceptar.setLocation(250, 340);
+		noAceptar.setLocation(330, 340);
 		noAceptar.setBackground(null);
 		panel2.add(noAceptar);
 
@@ -446,8 +446,10 @@ public class Ventana extends JFrame {
 
 		JButton boton = new JButton("Crear");
 		boton.setSize(190, 50);
-		boton.setLocation(150, 380);
+		boton.setLocation(230, 380);
 		boton.setFont(new Font("Arial", Font.BOLD, 18));
+		boton.setBackground(Color.decode("#28a745"));
+		boton.setForeground(Color.WHITE);
 		boton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		
 		boton.addActionListener(new ActionListener() {
@@ -467,7 +469,7 @@ public class Ventana extends JFrame {
 					bioArea.setBorder(BorderFactory.createLineBorder(Color.RED,3));
 				}else {
 					bioArea.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
-					flag1 = true;
+					flag2 = true;
 				}
 				
 				
@@ -478,7 +480,8 @@ public class Ventana extends JFrame {
 		panel2.add(boton);
 		
 		JButton irLogin = new JButton("Ir al login");
-		irLogin.setBounds(150, 470, 170, 50);
+		irLogin.setSize(190, 50);
+		irLogin.setLocation(230, 470);
 		irLogin.setFont(new Font("Arial", Font.BOLD, 18));
 		irLogin.setBackground(Color.decode("#00829B"));
 		irLogin.setForeground(Color.WHITE);
@@ -505,21 +508,78 @@ public class Ventana extends JFrame {
 		panel1.setOpaque(true);
 		panel1.setSize(500, 700);
 		panel1.setLocation(500, 0);
-		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setBackground(Color.decode("#adb5bd"));
 		panel1.setLayout(null);
 
-		// Etiquetas
-		JLabel etiqueta1 = new JLabel("Recuperación de cuenta");
-		etiqueta1.setSize(360, 30);
-		etiqueta1.setLocation(170, 80);
-		etiqueta1.setForeground(Color.BLACK);
-		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
-		panel1.add(etiqueta1);
+		// Título
+	    JLabel titulo = new JLabel("Recuperación de Cuenta");
+	    titulo.setSize(360, 30);
+	    titulo.setLocation(170, 80);
+	    titulo.setForeground(Color.BLACK);
+	    titulo.setFont(new Font("Georgia", Font.BOLD, 28));
+	    panel1.add(titulo);
+
+	    // Campo de texto para el correo electrónico
+	    JLabel etiquetaEmail = new JLabel("Correo electrónico:");
+	    etiquetaEmail.setSize(150, 30);
+	    etiquetaEmail.setLocation(170, 160);
+	    etiquetaEmail.setForeground(Color.BLACK);
+	    etiquetaEmail.setFont(new Font("Georgia", Font.BOLD, 14));
+	    panel1.add(etiquetaEmail);
+
+	    JTextField campoEmail = new JTextField();
+	    campoEmail.setSize(270, 30);
+	    campoEmail.setLocation(170, 190);
+	    campoEmail.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+	    panel1.add(campoEmail);
+
+	    // Botón de recuperación
+	    JButton botonRecuperar = new JButton("Recuperar");
+	    botonRecuperar.setBounds(220, 270, 170, 50);
+	    botonRecuperar.setFont(new Font("Arial", Font.BOLD, 18));
+	    botonRecuperar.setBackground(Color.decode("#28a745"));
+	    botonRecuperar.setForeground(Color.WHITE);
+	    botonRecuperar.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+	    
+	    botonRecuperar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean flag1 = false;
+				
+				if( campoEmail.getText().equals("")) {
+					 campoEmail.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+				}else {
+					 campoEmail.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+					flag1= true;
+				}
+				
+				
+				
+			}
+		});
+	    
+	    panel1.add(botonRecuperar);
+
+	    // Botón de volver
+	    JButton botonVolver = new JButton("Volver");
+	    botonVolver.setBounds(220, 370, 170, 50);
+	    botonVolver.setFont(new Font("Arial", Font.BOLD, 18));
+	    botonVolver.setBackground(Color.decode("#a4c3b2"));
+	    botonVolver.setForeground(Color.WHITE);
+	    botonVolver.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+	    botonVolver.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            router("login");
+	        }
+	    });
+	    panel1.add(botonVolver);
 		
 		
 		return panel1;
 	}
-	
+ 	
 	public JPanel alta() {
 		
 		JPanel panel1 = new JPanel();
@@ -527,16 +587,117 @@ public class Ventana extends JFrame {
 		panel1.setOpaque(true);
 		panel1.setSize(500, 700);
 		panel1.setLocation(500, 0);
-		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setBackground(Color.decode("#a3cef1"));
 		panel1.setLayout(null);
 
-		// Etiquetas
-		JLabel etiqueta1 = new JLabel("Alta de cuenta");
-		etiqueta1.setSize(360, 30);
-		etiqueta1.setLocation(170, 80);
-		etiqueta1.setForeground(Color.BLACK);
-		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
-		panel1.add(etiqueta1);
+		// Título
+	    JLabel titulo = new JLabel("Alta de Usuario");
+	    titulo.setSize(360, 30);
+	    titulo.setLocation(170, 80);
+	    titulo.setForeground(Color.BLACK);
+	    titulo.setFont(new Font("Georgia", Font.BOLD, 28));
+	    panel1.add(titulo);
+
+	    // Campo de texto para el nombre de usuario
+	    JLabel etiquetaUsuario = new JLabel("Nombre de usuario:");
+	    etiquetaUsuario.setSize(150, 30);
+	    etiquetaUsuario.setLocation(170, 160);
+	    etiquetaUsuario.setForeground(Color.BLACK);
+	    etiquetaUsuario.setFont(new Font("Georgia", Font.BOLD, 14));
+	    panel1.add(etiquetaUsuario);
+
+	    JTextField campoUsuario = new JTextField();
+	    campoUsuario.setSize(270, 30);
+	    campoUsuario.setLocation(170, 190);
+	    campoUsuario.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+	    panel1.add(campoUsuario);
+
+	    // Campo de texto para la contraseña
+	    JLabel etiquetaContrasena = new JLabel("Contraseña:");
+	    etiquetaContrasena.setSize(150, 30);
+	    etiquetaContrasena.setLocation(170, 230);
+	    etiquetaContrasena.setForeground(Color.BLACK);
+	    etiquetaContrasena.setFont(new Font("Georgia", Font.BOLD, 14));
+	    panel1.add(etiquetaContrasena);
+
+	    JPasswordField campoContrasena = new JPasswordField();
+	    campoContrasena.setSize(270, 30);
+	    campoContrasena.setLocation(170, 260);
+	    campoContrasena.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+	    panel1.add(campoContrasena);
+	    
+	 // Campo de texto para la contraseña
+	    JLabel etiquetaContrasena2 = new JLabel("Confirmar contraseña:");
+	    etiquetaContrasena2.setSize(180, 30);
+	    etiquetaContrasena2.setLocation(170, 300);
+	    etiquetaContrasena2.setForeground(Color.BLACK);
+	    etiquetaContrasena2.setFont(new Font("Georgia", Font.BOLD, 14));
+	    panel1.add(etiquetaContrasena2);
+
+	    JPasswordField campoContrasena2 = new JPasswordField();
+	    campoContrasena2.setSize(270, 30);
+	    campoContrasena2.setLocation(170, 330);
+	    campoContrasena2.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+	    panel1.add(campoContrasena2);
+
+	    // Botón de alta
+	    JButton botonAlta = new JButton("Dar de Alta");
+	    botonAlta.setBounds(220, 380, 170, 50);
+	    botonAlta.setFont(new Font("Arial", Font.BOLD, 18));
+	    botonAlta.setBackground(Color.decode("#28a745"));
+	    botonAlta.setForeground(Color.WHITE);
+	    botonAlta.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+	    
+	    botonAlta.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean flag1 = false, flag2 = false, flag3 = false;
+				
+				if(campoUsuario.getText().equals("")) {
+					campoUsuario.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+				}else {
+					campoUsuario.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+					flag1= true;
+				}
+				
+				String miContra = new String(campoContrasena.getPassword());
+				
+				if(miContra.equals("")) {
+					campoContrasena.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+				}else {
+					campoContrasena.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+					flag2 = true;
+				}
+				
+				String miContra2 = new String(campoContrasena2.getPassword());
+				
+				if(miContra2.equals("")) {
+					campoContrasena2.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+				}else {
+					campoContrasena2.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+					flag3 = true;
+				}
+				
+			}
+		});
+	    
+	    panel1.add(botonAlta);
+
+	    // Botón de volver
+	    JButton botonVolver = new JButton("Volver");
+	    botonVolver.setBounds(220, 480, 170, 50);
+	    botonVolver.setFont(new Font("Arial", Font.BOLD, 18));
+	    botonVolver.setBackground(Color.decode("#a4c3b2"));
+	    botonVolver.setForeground(Color.WHITE);
+	    botonVolver.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+	    botonVolver.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            router("login");
+	        }
+	    });
+	    panel1.add(botonVolver);
 		
 		
 		return panel1;
@@ -549,18 +710,96 @@ public class Ventana extends JFrame {
 		panel1.setOpaque(true);
 		panel1.setSize(500, 700);
 		panel1.setLocation(500, 0);
-		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setBackground(Color.decode("#a3cef1"));
 		panel1.setLayout(null);
 
-		// Etiquetas
-		JLabel etiqueta1 = new JLabel("baja de cuenta");
-		etiqueta1.setSize(360, 30);
-		etiqueta1.setLocation(170, 80);
-		etiqueta1.setForeground(Color.BLACK);
-		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
-		panel1.add(etiqueta1);
+	    // Título
+	    JLabel titulo = new JLabel("Baja de Usuario");
+	    titulo.setSize(360, 30);
+	    titulo.setLocation(170, 80);
+	    titulo.setForeground(Color.BLACK);
+	    titulo.setFont(new Font("Georgia", Font.BOLD, 28));
+	    panel1.add(titulo);
+
+	    // Campo de texto para el nombre de usuario
+	    JLabel etiquetaUsuario = new JLabel("Nombre de usuario:");
+	    etiquetaUsuario.setSize(150, 30);
+	    etiquetaUsuario.setLocation(170, 160);
+	    etiquetaUsuario.setForeground(Color.BLACK);
+	    etiquetaUsuario.setFont(new Font("Georgia", Font.BOLD, 14));
+	    panel1.add(etiquetaUsuario);
+
+	    JTextField campoUsuario = new JTextField();
+	    campoUsuario.setSize(270, 30);
+	    campoUsuario.setLocation(170, 190);
+	    campoUsuario.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+	    panel1.add(campoUsuario);
+	    
+	    // Campo de texto para la contraseña
+	    JLabel etiquetaContrasena = new JLabel("Contraseña:");
+	    etiquetaContrasena.setSize(150, 30);
+	    etiquetaContrasena.setLocation(170, 230);
+	    etiquetaContrasena.setForeground(Color.BLACK);
+	    etiquetaContrasena.setFont(new Font("Georgia", Font.BOLD, 14));
+	    panel1.add(etiquetaContrasena);
+
+	    JPasswordField campoContrasena = new JPasswordField();
+	    campoContrasena.setSize(270, 30); 
+	    campoContrasena.setLocation(170, 260);
+	    campoContrasena.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+	    panel1.add(campoContrasena);
+
+	    // Botón de baja
+	    JButton botonBaja = new JButton("Dar de Baja");
+	    botonBaja.setBounds(220, 320, 170, 50);
+	    botonBaja.setFont(new Font("Arial", Font.BOLD, 18));
+	    botonBaja.setBackground(Color.decode("#28a745"));
+	    botonBaja.setForeground(Color.WHITE);
+	    botonBaja.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+	    
+	    botonBaja.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean flag1 = false, flag2 = false;
+				
+				if(campoUsuario.getText().equals("")) {
+					campoUsuario.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+				}else {
+					campoUsuario.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+					flag1= true;
+				}
+				
+				String miContra = new String(campoContrasena.getPassword());
+				
+				if(miContra.equals("")) {
+					campoContrasena.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+				}else {
+					campoContrasena.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+					flag2 = true;
+				}
+				
+			}
+		});
+	    
+	    panel1.add(botonBaja);
+
+	    // Botón de volver
+	    JButton botonVolver = new JButton("Volver");
+	    botonVolver.setBounds(220, 420, 170, 50);
+	    botonVolver.setFont(new Font("Arial", Font.BOLD, 18));
+	    botonVolver.setBackground(Color.decode("#a4c3b2"));
+	    botonVolver.setForeground(Color.WHITE);
+	    botonVolver.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+	    botonVolver.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            router("login");
+	        }
+	    });
+	    panel1.add(botonVolver);
 		
-		
+	    
 		return panel1;
 	}
 
@@ -571,17 +810,46 @@ public class Ventana extends JFrame {
 		panel1.setOpaque(true);
 		panel1.setSize(500, 700);
 		panel1.setLocation(500, 0);
-		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setBackground(Color.decode("#ffe6a7"));
 		panel1.setLayout(null);
 
-		// Etiquetas
-		JLabel etiqueta1 = new JLabel("¿Cómo crear un usuario?");
-		etiqueta1.setSize(360, 30);
-		etiqueta1.setLocation(170, 80);
-		etiqueta1.setForeground(Color.BLACK);
-		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
-		panel1.add(etiqueta1);
-		
+	    // Título
+	    JLabel titulo = new JLabel("Crear Usuario");
+	    titulo.setSize(360, 30);
+	    titulo.setLocation(170, 80);
+	    titulo.setForeground(Color.BLACK);
+	    titulo.setFont(new Font("Georgia", Font.BOLD, 28));
+	    panel1.add(titulo);
+
+	    // Texto de ayuda
+	    JTextArea textoAyuda = new JTextArea("Para crear un usuario, sigue los siguientes pasos:\n\n" +
+	            "1. Ingresa un nombre de usuario único.\n" +
+	            "2. Proporciona una contraseña segura.\n" +
+	            "3. Completa los campos adicionales si es necesario.\n" +
+	            "4. Haz clic en 'Crear' para finalizar.");
+	    textoAyuda.setSize(400, 200);
+	    textoAyuda.setLocation(100, 160);
+	    textoAyuda.setEditable(false);
+	    textoAyuda.setLineWrap(true);
+	    textoAyuda.setWrapStyleWord(true);
+	    textoAyuda.setFont(new Font("Arial", Font.BOLD, 16));
+	    textoAyuda.setBackground(Color.decode("#ffe6a7"));
+	    panel1.add(textoAyuda);
+
+	    // Botón de volver
+	    JButton botonVolver = new JButton("Volver");
+	    botonVolver.setBounds(220, 400, 170, 50);
+	    botonVolver.setFont(new Font("Arial", Font.BOLD, 18));
+	    botonVolver.setBackground(Color.decode("#a4c3b2"));
+	    botonVolver.setForeground(Color.WHITE);
+	    botonVolver.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+	    botonVolver.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            router("login");
+	        }
+	    });
+	    panel1.add(botonVolver);
 		
 		return panel1;
 	}
@@ -593,16 +861,45 @@ public class Ventana extends JFrame {
 		panel1.setOpaque(true);
 		panel1.setSize(500, 700);
 		panel1.setLocation(500, 0);
-		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setBackground(Color.decode("#ffe6a7"));
 		panel1.setLayout(null);
 
-		// Etiquetas
-		JLabel etiqueta1 = new JLabel(" ¿Cómo acceder al sistema?");
-		etiqueta1.setSize(360, 30);
-		etiqueta1.setLocation(170, 80);
-		etiqueta1.setForeground(Color.BLACK);
-		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
-		panel1.add(etiqueta1);
+		  // Título
+	    JLabel titulo = new JLabel("Acceso al Sistema");
+	    titulo.setSize(360, 30);
+	    titulo.setLocation(170, 80);
+	    titulo.setForeground(Color.BLACK);
+	    titulo.setFont(new Font("Georgia", Font.BOLD, 28));
+	    panel1.add(titulo);
+
+	    // Texto de ayuda
+	    JTextArea textoAyuda = new JTextArea("Para acceder al sistema, sigue los siguientes pasos:\n\n" +
+	            "1. Ingresa tu nombre de usuario.\n" +
+	            "2. Proporciona tu contraseña.\n" +
+	            "3. Haz clic en 'Acceder' para ingresar al sistema.");
+	    textoAyuda.setSize(400, 200);
+	    textoAyuda.setLocation(100, 160);
+	    textoAyuda.setEditable(false);
+	    textoAyuda.setLineWrap(true);
+	    textoAyuda.setWrapStyleWord(true);
+	    textoAyuda.setFont(new Font("Arial", Font.BOLD, 16));
+	    textoAyuda.setBackground(Color.decode("#ffe6a7"));
+	    panel1.add(textoAyuda);
+
+	    // Botón de volver
+	    JButton botonVolver = new JButton("Volver");
+	    botonVolver.setBounds(220, 400, 170, 50);
+	    botonVolver.setFont(new Font("Arial", Font.BOLD, 18));
+	    botonVolver.setBackground(Color.decode("#a4c3b2"));
+	    botonVolver.setForeground(Color.WHITE);
+	    botonVolver.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+	    botonVolver.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            router("login");
+	        }
+	    });
+	    panel1.add(botonVolver);
 		
 		
 		return panel1;
@@ -615,16 +912,45 @@ public class Ventana extends JFrame {
 		panel1.setOpaque(true);
 		panel1.setSize(500, 700);
 		panel1.setLocation(500, 0);
-		panel1.setBackground(Color.LIGHT_GRAY);
+		panel1.setBackground(Color.decode("#ffe6a7"));
 		panel1.setLayout(null);
 
-		// Etiquetas
-		JLabel etiqueta1 = new JLabel(" ¿Qué pasa si olvidé mi contraseña?");
-		etiqueta1.setSize(360, 30);
-		etiqueta1.setLocation(170, 80);
-		etiqueta1.setForeground(Color.BLACK);
-		etiqueta1.setFont(new Font("Georgia", Font.BOLD, 28));
-		panel1.add(etiqueta1);
+		 // Título
+	    JLabel titulo = new JLabel("Recuperar Contraseña");
+	    titulo.setSize(360, 30);
+	    titulo.setLocation(100, 80);
+	    titulo.setForeground(Color.BLACK);
+	    titulo.setFont(new Font("Georgia", Font.BOLD, 28));
+	    panel1.add(titulo);
+
+	    // Texto de ayuda
+	    JTextArea textoAyuda = new JTextArea("Si olvidaste tu contraseña, sigue estos pasos:\n\n" +
+	            "1. Ingresa tu correo electrónico registrado.\n" +
+	            "2. Haz clic en 'Recuperar'.\n" +
+	            "3. Sigue las instrucciones que recibirás en tu correo.");
+	    textoAyuda.setSize(400, 200);
+	    textoAyuda.setLocation(100, 160);
+	    textoAyuda.setEditable(false);
+	    textoAyuda.setLineWrap(true);
+	    textoAyuda.setWrapStyleWord(true);
+	    textoAyuda.setFont(new Font("Arial", Font.BOLD, 16));
+	    textoAyuda.setBackground(Color.decode("#ffe6a7"));
+	    panel1.add(textoAyuda);
+
+	    // Botón de volver
+	    JButton botonVolver = new JButton("Volver");
+	    botonVolver.setBounds(220, 400, 170, 50);
+	    botonVolver.setFont(new Font("Arial", Font.BOLD, 18));
+	    botonVolver.setBackground(Color.decode("#a4c3b2"));
+	    botonVolver.setForeground(Color.WHITE);
+	    botonVolver.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+	    botonVolver.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            router("login");
+	        }
+	    });
+	    panel1.add(botonVolver);
 		
 		
 		return panel1;
@@ -680,7 +1006,7 @@ public class Ventana extends JFrame {
 
 		JPanel panel1 = new JPanel();
 
-		panel1.setBackground(Color.decode("#e0e1dd"));
+		panel1.setBackground(Color.decode("#a3cef1"));
 		panel1.setOpaque(true);
 		panel1.setSize(1000, 600);
 		panel1.setLocation(0, 0);
@@ -690,30 +1016,31 @@ public class Ventana extends JFrame {
 
 		Object[][] datos = {
 
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
-				{ "23454", "Juan", "Juan@gmail.mx", "18", "Activo" },
+			    { "12345", "Juan", "juan123@gmail.com", "25", "Activo" },
+			    { "67890", "Ana", "ana456@gmail.com", "32", "Inactivo" },
+			    { "11223", "Carlos", "carlos789@gmail.com", "27", "Activo" },
+			    { "44556", "Sofia", "sofia234@gmail.com", "21", "Pendiente" },
+			    { "78901", "David", "david567@gmail.com", "35", "Activo" },
+			    { "23456", "Pedro", "pedro678@gmail.com", "29", "Inactivo" },
+			    { "34567", "Marta", "marta123@gmail.com", "23", "Activo" },
+			    { "45678", "Luis", "luis987@gmail.com", "41", "Pendiente" },
+			    { "56789", "Maria", "maria654@gmail.com", "36", "Activo" },
+			    { "67812", "Julian", "julian321@gmail.com", "31", "Inactivo" },
+			    { "78923", "Ricardo", "ricardo876@gmail.com", "28", "Activo" },
+			    { "89034", "Beatriz", "beatriz999@gmail.com", "22", "Pendiente" },
+			    { "90145", "Gabriel", "gabriel654@gmail.com", "33", "Activo" },
+			    { "12367", "Paula", "paula432@gmail.com", "27", "Inactivo" },
+			    { "23478", "Emanuel", "emanuel765@gmail.com", "38", "Activo" },
+			    { "34589", "Isabel", "isabel123@gmail.com", "26", "Pendiente" },
+			    { "45690", "Victor", "victor321@gmail.com", "32", "Activo" },
+			    { "56701", "Laura", "laura432@gmail.com", "24", "Inactivo" },
+			    { "67813", "Fernando", "fernando654@gmail.com", "37", "Activo" },
+			    { "78934", "Sandra", "sandra876@gmail.com", "30", "Pendiente" },
+			    { "89045", "Javier", "javier123@gmail.com", "33", "Activo" },
+			    { "90156", "Cristina", "cristina987@gmail.com", "25", "Inactivo" },
+			    { "12378", "Antonio", "antonio432@gmail.com", "29", "Activo" },
+			    { "23489", "Elena", "elena543@gmail.com", "34", "Pendiente" },
+			    { "34590", "Raul", "raul654@gmail.com", "26", "Activo" }
 
 		};
 
@@ -752,6 +1079,23 @@ public class Ventana extends JFrame {
 		etiqueta2.setFont(new Font("Georgia", Font.BOLD, 18));
 		etiqueta2.setBackground(Color.BLUE);
 		panel1.add(etiqueta2);
+		
+		 // Botón de volver
+	    JButton botonVolver = new JButton("Volver");
+	    botonVolver.setBounds(220, 440, 170, 50);
+	    botonVolver.setFont(new Font("Arial", Font.BOLD, 18));
+	    botonVolver.setBackground(Color.decode("#a4c3b2"));
+	    botonVolver.setForeground(Color.WHITE);
+	    botonVolver.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+	    
+	    botonVolver.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            router("login");
+	        }
+	    });
+	    panel1.add(botonVolver);
+		
 
 		return panel1;
 	}
