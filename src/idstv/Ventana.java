@@ -20,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -52,9 +53,17 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
       // Para almacenar los puntos dibujados
  	private List<Point> points = new ArrayList<>();
  	
+	private List<Rectangle> Rectangulos = new ArrayList<>();
+	
+	private List<Circle> Circulo = new ArrayList<>();
+	
+    private List<Triangle> Triangulo = new ArrayList<>();
+ 	
     List<List<Point>> listaDePuntos = new ArrayList<>();
 	
     private DrawingPanel drawingPanel;
+    
+    private int method = 1;
     
     int  grosorPincel = 3;
     int grosorMin = 1;
@@ -100,14 +109,39 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
         
         JButton rectButton = new JButton("Rectángulo");
         rectButton.setFocusPainted(false);
+        rectButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				method = 2;
+				
+			}
+		});
         panel1.add(rectButton);
         
         JButton circleButton = new JButton("Círculo");
         circleButton.setFocusPainted(false);
+        circleButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				method = 3;
+				
+			}
+		});
         panel1.add(circleButton);
         
         JButton triangleButton = new JButton("Triángulo");
         triangleButton.setFocusPainted(false);
+        triangleButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				method = 4;
+				
+			}
+		});
+        
         panel1.add(triangleButton);
         
         JButton lineButton = new JButton("Línea");
@@ -119,13 +153,19 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
         optionsLabel.setFont(new Font("Arial", Font.BOLD, 14));
         panel1.add(optionsLabel);
         
-        JRadioButton brushButton = new JRadioButton("Pincel", true);
-        brushButton.setBackground(Color.WHITE);
+        JButton brushButton = new JButton("Pincel");
+       
+        brushButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				method = 1;
+				
+			}
+		});
         panel1.add(brushButton);
         
-        JRadioButton eraserButton = new JRadioButton("Borrador");
-        eraserButton.setBackground(Color.WHITE);
-        panel1.add(eraserButton);
+
         
         JCheckBox fillColor = new JCheckBox("Rellenar");
         fillColor.setBackground(Color.WHITE);
@@ -168,9 +208,8 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 		});
         grosorPanel.add(masButton);
         
-        ButtonGroup toolsGroup = new ButtonGroup();
-        toolsGroup.add(brushButton);
-        toolsGroup.add(eraserButton);
+         
+        
         
         //colores
         JLabel colorLabel = new JLabel("Colores");
@@ -211,7 +250,10 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 			@Override
 			public void actionPerformed(ActionEvent e) {
 		        listaDePuntos.clear();  
-		        points.clear();        
+		        points.clear();
+		        Rectangulos.clear();
+		        Circulo.clear();
+		        Triangulo.clear();
 		        drawingPanel.repaint(); 
 				
 			}
@@ -245,7 +287,18 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(method==2) {
+ 			Rectangle tmp = new Rectangle(e.getX(),e.getY(),100,100);
+ 			Rectangulos.add(tmp);
+ 		}else if (method == 3) {
+            Circulo.add(new Circle(e.getX(), e.getY(), 50));
+        } else if (method == 4) {
+            Triangulo.add(new Triangle(e.getX(), e.getY(), 50));
+        }
+		
+ 		
+ 		
+ 		drawingPanel.repaint();
 		
 	}
 
@@ -284,9 +337,10 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
- Point newPoint = e.getPoint(); 
+		Point newPoint = e.getPoint(); 
  		 
- 		 points.add(newPoint);  
+		if(method==1)
+			 points.add(newPoint);  
  	        
  	     drawingPanel.repaint();
  	        
@@ -327,8 +381,62 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
  	                g2d.drawLine(p1.x, p1.y, p2.x, p2.y);
  	            }
  	        }
+ 	        
+	        for (Iterator iterator = Rectangulos.iterator(); iterator.hasNext();) {
+ 				Rectangle rectangle = (Rectangle) iterator.next();
+ 				
+ 				g2d.drawRect(rectangle.x, rectangle.y, rectangle.w, rectangle.h);
+ 				
+ 			}
+	        
+	        for (Iterator iterator = Circulo.iterator(); iterator.hasNext();) {
+	            Circle circle = (Circle) iterator.next();
+	            g2d.drawOval(circle.x - circle.radius, circle.y - circle.radius, circle.radius * 2, circle.radius * 2);
+	        }
+	        
+	        for (Iterator iterator = Triangulo.iterator(); iterator.hasNext();) {
+	            Triangle triangle = (Triangle) iterator.next();
+	            int[] xPoints = {triangle.x, triangle.x - triangle.size, triangle.x + triangle.size};
+	            int[] yPoints = {triangle.y - triangle.size, triangle.y + triangle.size, triangle.y + triangle.size};
+	            g2d.drawPolygon(xPoints, yPoints, 3);
+	        }
  	    }
  	}
+	
+	class Rectangle{
+ 		
+ 		private int x,y,w,h;
+ 		
+ 		public Rectangle(int x, int y,int w, int h)
+ 		{
+ 			this.x = x;
+ 			this.y = y;
+ 			this.w = w;
+ 			this.h = h;
+ 		}
+ 	}
+	
+    class Circle {
+        private int x, y, radius;
+        
+        public Circle(int x, int y, int radius) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+        }
+    }
+    
+    class Triangle {
+        private int x, y, size;
+        
+        public Triangle(int x, int y, int size) {
+            this.x = x;
+            this.y = y;
+            this.size = size;
+        }
+    }
+
+
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
