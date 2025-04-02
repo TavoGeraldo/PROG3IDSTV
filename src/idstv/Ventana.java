@@ -51,7 +51,7 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
  	
  	private Point lastPoint; // Para almacenar la última posición del mouse
       // Para almacenar los puntos dibujados
- 	private List<Point> points = new ArrayList<>();
+ 	private List<MyPoint> points = new ArrayList<>();
  	
 	private List<Rectangle> Rectangulos = new ArrayList<>();
 	
@@ -59,11 +59,13 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 	
     private List<Triangle> Triangulo = new ArrayList<>();
  	
-    List<List<Point>> listaDePuntos = new ArrayList<>();
+    List<List<MyPoint>> listaDePuntos = new ArrayList<>();
 	
     private DrawingPanel drawingPanel;
     
     private int method = 1;
+    
+    private Color colorActual = Color.BLACK;
     
     int  grosorPincel = 3;
     int grosorMin = 1;
@@ -224,23 +226,67 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
         JButton redButton = new JButton();
         redButton.setBackground(Color.RED);
         redButton.setPreferredSize(new Dimension(20, 20));
+        redButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				colorActual = Color.RED;
+				
+			}
+		});
         colorPanel.add(redButton);
         
         JButton blueButton = new JButton();
         blueButton.setBackground(Color.BLUE);
         blueButton.setPreferredSize(new Dimension(20, 20));
+        blueButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				colorActual = Color.BLUE;
+				
+			}
+		});
         colorPanel.add(blueButton);
         
         JButton greenButton = new JButton();
         greenButton.setBackground(Color.GREEN);
         greenButton.setPreferredSize(new Dimension(20, 20));
+        greenButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				colorActual = Color.GREEN;
+				
+			}
+		});
         colorPanel.add(greenButton);
         
         JButton yellowButton = new JButton();
         yellowButton.setBackground(Color.YELLOW);
         yellowButton.setPreferredSize(new Dimension(20, 20));
+        yellowButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				colorActual = Color.YELLOW;
+				
+			}
+		});
         colorPanel.add(yellowButton);
         
+        JButton blackButton = new JButton();
+        blackButton.setBackground(Color.BLACK);
+        blackButton.setPreferredSize(new Dimension(20, 20));
+        blackButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				colorActual = Color.BLACK;
+				
+			}
+		});
+        colorPanel.add(blackButton);
          
         
         JButton clearButton = new JButton("Limpiar");
@@ -288,12 +334,12 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(method==2) {
- 			Rectangle tmp = new Rectangle(e.getX(),e.getY(),100,100);
+ 			Rectangle tmp = new Rectangle(e.getX(),e.getY(),100,100,colorActual, grosorPincel );
  			Rectangulos.add(tmp);
  		}else if (method == 3) {
-            Circulo.add(new Circle(e.getX(), e.getY(), 50));
+            Circulo.add(new Circle(e.getX(), e.getY(), 50,colorActual, grosorPincel));
         } else if (method == 4) {
-            Triangulo.add(new Triangle(e.getX(), e.getY(), 50));
+            Triangulo.add(new Triangle(e.getX(), e.getY(), 50,colorActual, grosorPincel));
         }
 		
  		
@@ -306,14 +352,14 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		lastPoint = e.getPoint();
-        points.add(lastPoint); // Añadir el primer punto
+        points.add(new MyPoint(e.getX(), e.getY(),colorActual, grosorPincel)); // Añadir el primer punto
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		ArrayList<Point> listaCopiada = (ArrayList<Point>) (((ArrayList<Point>) points).clone());
+		ArrayList<MyPoint> listaCopiada = (ArrayList<MyPoint>) (((ArrayList<MyPoint>) points).clone());
  		
  		listaDePuntos.add(listaCopiada); 
  		points.clear();
@@ -340,7 +386,7 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 		Point newPoint = e.getPoint(); 
  		 
 		if(method==1)
-			 points.add(newPoint);  
+			 points.add(new MyPoint(e.getX(), e.getY(), colorActual, grosorPincel));  
  	        
  	     drawingPanel.repaint();
  	        
@@ -363,11 +409,13 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
  	        g2d.setStroke(new BasicStroke(grosorPincel));
  	        
  	        // Dibujar todos los trazos guardados (listaDePuntos)
- 	        for (List<Point> trazo : listaDePuntos) {
+ 	        for (List<MyPoint> trazo : listaDePuntos) {
  	            if (trazo.size() > 1) {
  	                for (int i = 1; i < trazo.size(); i++) {
- 	                    Point p1 = trazo.get(i - 1);
- 	                    Point p2 = trazo.get(i);
+ 	                    MyPoint p1 = trazo.get(i - 1);
+ 	                    MyPoint p2 = trazo.get(i);
+ 	                    g2d.setColor(p1.color);
+ 	                    g2d.setStroke(new BasicStroke(p1.grosor));
  	                    g2d.drawLine(p1.x, p1.y, p2.x, p2.y);
  	                }
  	            }
@@ -376,21 +424,29 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
  	        // Dibujar el trazo actual (points) mientras se arrastra el mouse
  	        if (points.size() > 1) {
  	            for (int i = 1; i < points.size(); i++) {
- 	                Point p1 = points.get(i - 1);
- 	                Point p2 = points.get(i);
+ 	                MyPoint p1 = points.get(i - 1);
+ 	                MyPoint p2 = points.get(i);
+ 	                g2d.setColor(p1.color);
+ 	                g2d.setStroke(new BasicStroke(p1.grosor));
  	                g2d.drawLine(p1.x, p1.y, p2.x, p2.y);
  	            }
  	        }
  	        
+ 	        g2d.setColor(colorActual);
+ 	        g2d.setStroke(new BasicStroke(grosorPincel));
+ 	        
 	        for (Iterator iterator = Rectangulos.iterator(); iterator.hasNext();) {
  				Rectangle rectangle = (Rectangle) iterator.next();
- 				
+ 				g2d.setColor(rectangle.color);
+ 		        g2d.setStroke(new BasicStroke(rectangle.grosor));
  				g2d.drawRect(rectangle.x, rectangle.y, rectangle.w, rectangle.h);
  				
  			}
 	        
 	        for (Iterator iterator = Circulo.iterator(); iterator.hasNext();) {
 	            Circle circle = (Circle) iterator.next();
+	            g2d.setColor(circle.color);
+ 		        g2d.setStroke(new BasicStroke(circle.grosor));
 	            g2d.drawOval(circle.x - circle.radius, circle.y - circle.radius, circle.radius * 2, circle.radius * 2);
 	        }
 	        
@@ -398,6 +454,8 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 	            Triangle triangle = (Triangle) iterator.next();
 	            int[] xPoints = {triangle.x, triangle.x - triangle.size, triangle.x + triangle.size};
 	            int[] yPoints = {triangle.y - triangle.size, triangle.y + triangle.size, triangle.y + triangle.size};
+	            g2d.setColor(triangle.color);
+ 		        g2d.setStroke(new BasicStroke(triangle.grosor));
 	            g2d.drawPolygon(xPoints, yPoints, 3);
 	        }
  	    }
@@ -406,34 +464,59 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 	class Rectangle{
  		
  		private int x,y,w,h;
+ 		Color color;
+    	int grosor;
  		
- 		public Rectangle(int x, int y,int w, int h)
+ 		public Rectangle(int x, int y,int w, int h,Color color,int grosor)
  		{
  			this.x = x;
  			this.y = y;
  			this.w = w;
  			this.h = h;
+ 			this.color = color;
+ 			this.grosor = grosor;
  		}
  	}
 	
     class Circle {
         private int x, y, radius;
+        Color color;
+    	int grosor;
         
-        public Circle(int x, int y, int radius) {
+        public Circle(int x, int y, int radius,Color color,int grosor) {
             this.x = x;
             this.y = y;
             this.radius = radius;
+            this.color = color;
+ 			this.grosor = grosor;
         }
     }
     
     class Triangle {
         private int x, y, size;
+        Color color;
+    	int grosor;
         
-        public Triangle(int x, int y, int size) {
+        public Triangle(int x, int y, int size,Color color,int grosor) {
             this.x = x;
             this.y = y;
             this.size = size;
+            this.color = color;
+ 			this.grosor = grosor;
         }
+    }
+    
+    class MyPoint extends Point{
+    	int x,y;
+    	Color color;
+    	int grosor;
+    	
+    	public MyPoint (int x,int y,Color color,int grosor) {
+    		this.x = x;
+    		this.y = y;
+    		this.color = color;
+    		this.grosor = grosor;
+    	}
     }
 
 
