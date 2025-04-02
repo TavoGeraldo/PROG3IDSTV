@@ -67,6 +67,10 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
     
     private Color colorActual = Color.BLACK;
     
+    private int grosorBorrador = 40;
+    
+    private Color colorBorrador= Color.WHITE;
+    
     int  grosorPincel = 3;
     int grosorMin = 1;
     int grosorMax = 18;  
@@ -166,6 +170,19 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 			}
 		});
         panel1.add(brushButton);
+        
+        JButton eraserButton = new JButton("Borrador");
+        
+        eraserButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				method = 5;
+				
+				
+			}
+		});
+        panel1.add(eraserButton);
         
 
         
@@ -300,6 +317,7 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 		        Rectangulos.clear();
 		        Circulo.clear();
 		        Triangulo.clear();
+		        points.clear();
 		        drawingPanel.repaint(); 
 				
 			}
@@ -385,9 +403,12 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
 		// TODO Auto-generated method stub
 		Point newPoint = e.getPoint(); 
  		 
-		if(method==1)
+		if(method==1) {
 			 points.add(new MyPoint(e.getX(), e.getY(), colorActual, grosorPincel));  
- 	        
+		} else if (method == 5) { 
+	        points.add(new MyPoint(e.getX(), e.getY(), colorBorrador, grosorBorrador)); 
+	    }
+		
  	     drawingPanel.repaint();
  	        
  	     lastPoint = newPoint;
@@ -403,34 +424,6 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
  	    protected void paintComponent(Graphics g) {
  	        super.paintComponent(g);
  	        Graphics2D g2d = (Graphics2D) g;
- 	        
- 	        // Configuración del dibujo
- 	        g2d.setColor(Color.BLACK);
- 	        g2d.setStroke(new BasicStroke(grosorPincel));
- 	        
- 	        // Dibujar todos los trazos guardados (listaDePuntos)
- 	        for (List<MyPoint> trazo : listaDePuntos) {
- 	            if (trazo.size() > 1) {
- 	                for (int i = 1; i < trazo.size(); i++) {
- 	                    MyPoint p1 = trazo.get(i - 1);
- 	                    MyPoint p2 = trazo.get(i);
- 	                    g2d.setColor(p1.color);
- 	                    g2d.setStroke(new BasicStroke(p1.grosor));
- 	                    g2d.drawLine(p1.x, p1.y, p2.x, p2.y);
- 	                }
- 	            }
- 	        }
- 	        
- 	        // Dibujar el trazo actual (points) mientras se arrastra el mouse
- 	        if (points.size() > 1) {
- 	            for (int i = 1; i < points.size(); i++) {
- 	                MyPoint p1 = points.get(i - 1);
- 	                MyPoint p2 = points.get(i);
- 	                g2d.setColor(p1.color);
- 	                g2d.setStroke(new BasicStroke(p1.grosor));
- 	                g2d.drawLine(p1.x, p1.y, p2.x, p2.y);
- 	            }
- 	        }
  	        
  	        g2d.setColor(colorActual);
  	        g2d.setStroke(new BasicStroke(grosorPincel));
@@ -458,6 +451,36 @@ public class Ventana extends JFrame implements MouseListener, MouseMotionListene
  		        g2d.setStroke(new BasicStroke(triangle.grosor));
 	            g2d.drawPolygon(xPoints, yPoints, 3);
 	        }
+ 	        
+ 	        // Configuración del dibujo
+ 	        g2d.setColor(colorActual  );
+ 	        g2d.setStroke(new BasicStroke(grosorPincel));
+ 	        
+ 	        // Dibujar todos los trazos guardados (listaDePuntos)
+ 	        for (List<MyPoint> trazo : listaDePuntos) {
+ 	            if (trazo.size() > 1) {
+ 	                for (int i = 1; i < trazo.size(); i++) {
+ 	                    MyPoint p1 = trazo.get(i - 1);
+ 	                    MyPoint p2 = trazo.get(i);
+ 	                    g2d.setColor(p1.color);
+ 	                    g2d.setStroke(new BasicStroke(p1.grosor));
+ 	                    g2d.drawLine(p1.x, p1.y, p2.x, p2.y);
+ 	                }
+ 	            }
+ 	        }
+ 	        
+ 	        // Dibujar el trazo actual (points) mientras se arrastra el mouse
+ 	        if (points.size() > 1) {
+ 	            for (int i = 1; i < points.size(); i++) {
+ 	                MyPoint p1 = points.get(i - 1);
+ 	                MyPoint p2 = points.get(i);
+ 	                g2d.setColor(p1.color);
+ 	                g2d.setStroke(new BasicStroke(p1.grosor));
+ 	                g2d.drawLine(p1.x, p1.y, p2.x, p2.y);
+ 	            }
+ 	        }
+ 	        
+
  	    }
  	}
 	
