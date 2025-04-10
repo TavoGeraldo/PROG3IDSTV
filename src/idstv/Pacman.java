@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,8 +31,17 @@ public class Pacman extends JFrame implements KeyListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private DrawingPanel panel_2;
-	private int x = 200, y = 100;
 	private int direccion = 3; // 0=arriba 1=izquierda 2=abajo 3=derecha
+	private Player pacman;
+	private List<Player> paredes = new ArrayList<>();
+	Timer timer;
+	Timer timer2;
+	private int lastPress = 0;
+	private int anguloBoca = 270; 
+	private boolean bocaAbierta = true;
+	private int contadorBoca = 0;
+
+
 
 
 	/**
@@ -58,6 +68,14 @@ public class Pacman extends JFrame implements KeyListener {
 		setBounds(100, 100, 500, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		pacman = new Player(100, 200, 30, 30, Color.YELLOW);
+		
+		paredes.add(new Player(120, 300, 200, 30, Color.ORANGE));
+		
+		paredes.add(new Player(120, 100, 200, 30, Color.blue));
+		
+		paredes.add(new Player(400, 100, 20, 170, Color.PINK));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -83,9 +101,13 @@ public class Pacman extends JFrame implements KeyListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				x = 200;
-				y = 100;
-
+				pacman.x = 100;
+				pacman.y = 200;
+				
+				
+				lastPress = 0;
+				timer.stop();
+				
 				panel_2.repaint();
 
 				panel_2.requestFocus();
@@ -94,7 +116,32 @@ public class Pacman extends JFrame implements KeyListener {
 		});
 		panel_1.add(reiniciar);
 
+		ActionListener taskPerformer = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				update();
+				contadorBoca++;
+				if (contadorBoca >= 15) { 
+				    bocaAbierta = !bocaAbierta;
+				    if (bocaAbierta) {
+				        anguloBoca = 270;
+				    } else {
+				        anguloBoca = 360;
+				    }
 
+				    contadorBoca = 0;
+				}
+				panel_2.repaint();
+
+
+					
+			}
+		};
+		timer = new Timer(3,taskPerformer);
+		
 
 	}
 
@@ -108,7 +155,7 @@ public class Pacman extends JFrame implements KeyListener {
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D) g;
 
-			g2d.setColor(Color.YELLOW);
+			g2d.setColor(pacman.c);
 			int angulo = 0;
 
 			switch (direccion) {
@@ -126,10 +173,17 @@ public class Pacman extends JFrame implements KeyListener {
 				break; 
 			}
 
-			g2d.fillArc(x, y, 30, 30, angulo, 270); 
+			g2d.fillArc(pacman.x, pacman.y, pacman.w, pacman.h, angulo, anguloBoca);
+			
+			for (Player pared : paredes) {
+				g2d.setColor(pared.c);
+				g2d.fillRect(pared.x, pared.y, pared.w, pared.h);
+				
+			}
 
 		}
 	}
+	
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -140,42 +194,113 @@ public class Pacman extends JFrame implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(y);
-		// W para arriba
-		if (e.getKeyCode() == 87) { // W
-			y -= 5;
-			direccion = 0;
-			if (y <= -35) {
-				y = 475;
+		lastPress = e.getKeyCode();
+		timer.start();
+		update();
+	}
+	
+	public void update() {
+		Boolean colision = false;
+		
+		for (Player pared : paredes) {
+			if(pacman.colision(pared)) {
+				colision = true;
 			}
+			
+			
+		}
+		
+		// W para arriba
+		if (lastPress == 87) { // W
+			direccion = 0;
+			if(!colision) {
+				pacman.y-=1;
+			}else {
+				pacman.y+=2;
+				lastPress =  0; 
+			}
+			if (pacman.y <= -35) {
+				pacman.y = 470;
+			}
+
+
 		}
 		// S para abajo
-		if (e.getKeyCode() == 83) { 
-			y += 5;
+		if (lastPress == 83) { 
 			direccion = 2;
-			if (y >= 480) {
-				y = -25;
+			if(!colision) {
+				pacman.y+=1;
+			}else {
+				pacman.y-=2;
+				lastPress =  0;
+			}
+			if (pacman.y >= 480) {
+				pacman.y = -20;
 			}
 		}
 		// A para izquierda
-		if (e.getKeyCode() == 65) { 
-			x -= 5;
+		if (lastPress == 65) {
 			direccion = 1;
-			if (x <= -30) {
-				x = 475;
+			if(!colision) {
+				pacman.x-=1;
+			}else {
+				pacman.x+=2;
+				lastPress =  0;
+			}
+			if (pacman.x <= -30) {
+				pacman.x = 475;
 			}
 		}
 		// D para derecha
-		if (e.getKeyCode() == 68) { 
-			x += 5;
+		if (lastPress == 68) {
 			direccion = 3;
-			if (x >= 475) {
-				x = -25;
+			if(!colision) {
+				pacman.x+=1;
+			}else {
+				pacman.x-=2;
+				lastPress =  0;
 			}
+			if (pacman.x >= 475) {
+				pacman.x = -25;
+			}
+
 		}
 
 		panel_2.repaint();
 	}
+	
+	class Player{
+		int x,y,w,h;
+		Color c;
+		public Player(int x,int y, int w, int h, Color c) {
+			this.x = x;
+			this.y = y;
+			this.w = w;
+			this.h = h;
+			this.c = c;
+		}
+		
+		public boolean colision(Player target) {
+			
+			
+			if(this.x < target.x + target.w &&
+
+					this.x + this.w > target.x &&
+
+					this.y < target.y + target.h &&
+
+					this.y + this.h > target.y) {
+
+					return true;
+
+					}
+			
+			
+			return false;
+		}
+	}
+	
+	
 
 	@Override
 	public void keyReleased(KeyEvent e) {
