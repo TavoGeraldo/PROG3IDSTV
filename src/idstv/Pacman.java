@@ -1,6 +1,7 @@
 package idstv;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
@@ -40,7 +42,8 @@ public class Pacman extends JFrame implements KeyListener {
 	private int anguloBoca = 270; 
 	private boolean bocaAbierta = true;
 	private int contadorBoca = 0;
-
+	private JLabel cronometro;
+	int seg = 0;
 
 
 
@@ -83,6 +86,11 @@ public class Pacman extends JFrame implements KeyListener {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 128, 255));
 		contentPane.add(panel, BorderLayout.NORTH);
+		
+		cronometro = new JLabel("0:0");
+		cronometro.setFont(new Font("Arial", Font.PLAIN, 30));
+		cronometro.setForeground(Color.WHITE);
+		panel.add(cronometro);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(0, 128, 255));
@@ -111,6 +119,14 @@ public class Pacman extends JFrame implements KeyListener {
 				panel_2.repaint();
 
 				panel_2.requestFocus();
+				timer2.stop();
+				seg = 0;
+				cronometro.setText("0:0");
+				
+				bocaAbierta = true;
+				anguloBoca = 270;
+				contadorBoca = 0;
+				
 
 			}
 		});
@@ -133,6 +149,7 @@ public class Pacman extends JFrame implements KeyListener {
 				    }
 
 				    contadorBoca = 0;
+				    
 				}
 				panel_2.repaint();
 
@@ -141,6 +158,28 @@ public class Pacman extends JFrame implements KeyListener {
 			}
 		};
 		timer = new Timer(3,taskPerformer);
+		
+		ActionListener taskPerformer2 = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				String [] split_string = cronometro.getText().split(":");
+				int min = Integer.parseInt(split_string[1]);
+				
+				min+=1;
+				
+				if(min>=60) {
+					seg++;
+					min = 0;
+				}
+				
+				cronometro.setText(seg+":"+min+"");
+					
+			}
+		};
+		timer2 = new Timer(1000,taskPerformer2);
 		
 
 	}
@@ -197,6 +236,7 @@ public class Pacman extends JFrame implements KeyListener {
 		lastPress = e.getKeyCode();
 		timer.start();
 		update();
+		timer2.start();
 	}
 	
 	public void update() {
