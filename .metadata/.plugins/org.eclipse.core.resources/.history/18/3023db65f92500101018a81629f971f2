@@ -1,0 +1,193 @@
+package views;
+
+import javax.swing.JTextField;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.border.LineBorder;
+import javax.swing.BorderFactory;
+
+import controllers.AuthController;
+import models.AuthModel; 
+
+public class AuthView {
+
+	public AuthView() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public void login() {
+		
+			
+			JFrame ventana = new JFrame();
+	 		
+	 		ventana.setVisible(true);
+	 		ventana.setSize(930, 600);
+	 		ventana.setLocationRelativeTo(null); 
+	 		ventana.setTitle("Login"); 
+	 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+	 		ventana.setResizable(true); 
+			
+			JPanel panel1 = new JPanel();
+			ventana.add(panel1);
+
+			panel1.setOpaque(true);
+			panel1.setSize(500, 700);
+			panel1.setLocation(500, 0);
+			panel1.setLayout(null);
+
+			// Etiquetas
+			JLabel etiqueta1 = new JLabel("Nombre de usuario:");
+			etiqueta1.setSize(150, 30);
+			etiqueta1.setLocation(170, 80);
+			etiqueta1.setForeground(Color.WHITE);
+			etiqueta1.setFont(new Font("Georgia", Font.BOLD, 14));
+			panel1.add(etiqueta1);
+
+			JLabel etiqueta2 = new JLabel("Contraseña:");
+			etiqueta2.setSize(150, 30);
+			etiqueta2.setLocation(170, 160);
+			etiqueta2.setForeground(Color.WHITE);
+			etiqueta2.setFont(new Font("Georgia", Font.BOLD, 14));
+			panel1.add(etiqueta2);
+
+			JLabel etiqueta4 = new JLabel("¿Olvido su contraseña?");
+			etiqueta4.setSize(150, 30);
+			etiqueta4.setLocation(290, 220);
+			etiqueta4.setForeground(Color.WHITE);
+			panel1.add(etiqueta4);
+
+			JCheckBox caja = new JCheckBox("Recordarme");
+			caja.setSize(110, 30);
+			caja.setLocation(170, 220);
+			caja.setForeground(Color.WHITE);
+			caja.setContentAreaFilled(false);
+			panel1.add(caja);
+
+			// Campos de texto
+			JPasswordField contrasena = new JPasswordField();
+			contrasena.setSize(270, 30);
+			contrasena.setLocation(170, 190);
+			contrasena.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+			panel1.add(contrasena);
+
+			JTextField usuario = new JTextField();
+			usuario.setSize(270, 30);
+			usuario.setLocation(170, 110);
+			usuario.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+			panel1.add(usuario);
+
+			// Botones
+			JButton boton = new JButton("Acceder");
+			boton.setBounds(220, 270, 170, 50);
+			boton.setFont(new Font("Arial", Font.BOLD, 18));
+			boton.setBackground(Color.decode("#28a745"));
+			boton.setForeground(Color.WHITE);
+			
+			
+			boton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					boolean flag1 = false, flag2 = false;
+					
+					if(usuario.getText().equals("")) {
+						usuario.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+					}else {
+						usuario.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+						flag1= true;
+					}
+					
+					String miContra = new String(contrasena.getPassword());
+					
+					if(miContra.equals("")) {
+						contrasena.setBorder(BorderFactory.createLineBorder(Color.RED,3));
+					}else {
+						contrasena.setBorder(BorderFactory.createLineBorder(Color.GREEN,3));
+						flag2 = true;
+					}
+					
+					if(flag1 && flag2) {
+						if(usuario.getText().equals("octavio.uabcs.mx")) { 
+							if(miContra.equals("contraseña123")) {
+								JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+						}else
+							JOptionPane.showMessageDialog(null, "Error");
+						}else 
+							JOptionPane.showMessageDialog(null, "Error");
+						
+						
+						
+					}
+				}
+				
+				
+			});
+			
+			panel1.add(boton);
+			
+			// Imagen usuario
+	 		ImageIcon icon = new ImageIcon(this.getClass().getResource("/images/user.png"));
+	 		
+	 		// Con esto se redimenciona la imagen para que quede bien
+	 		Image imagen = icon.getImage(); 
+	 		Image imagenNueva = imagen.getScaledInstance(30, 30, Image.SCALE_SMOOTH); 
+	 		ImageIcon iconoNuevo = new ImageIcon(imagenNueva);
+	 		//Aqui se crea la imagen ya redimencionada
+	 		JLabel iconoUsuario = new JLabel(iconoNuevo);
+	 		iconoUsuario.setSize(30, 30); 
+	 		iconoUsuario.setLocation(130, 110); 
+	 		panel1.add(iconoUsuario);
+	 		
+	 		//Imagen contraseña
+	 		ImageIcon icon2 = new ImageIcon("/images/padlock.png");
+	 		//aqui igual se redimenciona
+	 		Image imagen2 = icon2.getImage(); 
+	 		Image imagenNueva2 = imagen2.getScaledInstance(30, 30, Image.SCALE_SMOOTH); 
+	 		ImageIcon iconoNuevo2 = new ImageIcon(imagenNueva2);
+	 		
+	 		JLabel iconoPassword = new JLabel(iconoNuevo2);
+	 		iconoPassword.setSize(30, 30); 
+	 		iconoPassword.setLocation(130, 190); 
+	 		panel1.add(iconoPassword);
+	 		
+	 		//fondo
+	 		JLabel fondo = new JLabel(new ImageIcon(this.getClass().getResource("/images/fondo.jpg")));
+	 		fondo.setSize(1000, 600);
+	 		fondo.setLocation(0, 0);
+	 		panel1.add(fondo);
+			
+			JButton irRegistro = new JButton("Ir a registro");
+			irRegistro.setBounds(220, 370, 170, 50);
+			irRegistro.setFont(new Font("Arial", Font.BOLD, 18));
+			irRegistro.setBackground(Color.decode("#00829B"));
+			irRegistro.setForeground(Color.WHITE);
+			
+			
+			irRegistro.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					
+				}
+			});
+			
+			panel1.add(irRegistro);
+	}
+
+}

@@ -1,0 +1,152 @@
+package views;
+
+import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
+public class AuthView {
+
+    public AuthView() {
+        // Constructor
+    }
+    
+    public void login() {
+        JFrame ventana = new JFrame();
+        
+        ventana.setVisible(true);
+        ventana.setSize(930, 600);
+        ventana.setLocationRelativeTo(null); 
+        ventana.setTitle("Login"); 
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        ventana.setResizable(true); 
+        
+        JPanel panel1 = new JPanel();
+        ventana.add(panel1);
+
+        panel1.setOpaque(true);
+        panel1.setSize(500, 700);
+        panel1.setLocation(500, 0);
+        panel1.setBackground(new Color(30, 58, 138)); // Azul oscuro (#1E3A8A)
+        panel1.setLayout(null);
+
+        // Etiquetas (Texto blanco/amarillo)
+        JLabel etiqueta1 = new JLabel("Nombre de usuario:");
+        etiqueta1.setSize(150, 30);
+        etiqueta1.setLocation(170, 80);
+        etiqueta1.setForeground(Color.YELLOW); // Amarillo
+        etiqueta1.setFont(new Font("Georgia", Font.BOLD, 14));
+        panel1.add(etiqueta1);
+
+        JLabel etiqueta2 = new JLabel("Contraseña:");
+        etiqueta2.setSize(150, 30);
+        etiqueta2.setLocation(170, 160);
+        etiqueta2.setForeground(Color.WHITE); // Blanco
+        etiqueta2.setFont(new Font("Georgia", Font.BOLD, 14));
+        panel1.add(etiqueta2);
+
+        JLabel etiqueta4 = new JLabel("¿Olvidó su contraseña?");
+        etiqueta4.setSize(180, 30);
+        etiqueta4.setLocation(290, 220);
+        etiqueta4.setForeground(new Color(255, 215, 0)); // Oro
+        etiqueta4.setFont(new Font("Arial", Font.ITALIC, 12));
+        panel1.add(etiqueta4);
+
+        JCheckBox caja = new JCheckBox("Recordarme");
+        caja.setSize(110, 30);
+        caja.setLocation(170, 220);
+        caja.setForeground(Color.WHITE);
+        caja.setFont(new Font("Arial", Font.PLAIN, 12));
+        caja.setContentAreaFilled(false);
+        panel1.add(caja);
+
+        // Campos de texto (con fondo claro)
+        JPasswordField contrasena = new JPasswordField();
+        contrasena.setSize(270, 30);
+        contrasena.setLocation(170, 190);
+        contrasena.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        contrasena.setBackground(Color.WHITE);
+        panel1.add(contrasena);
+
+        JTextField usuario = new JTextField();
+        usuario.setSize(270, 30);
+        usuario.setLocation(170, 110);
+        usuario.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        usuario.setBackground(Color.WHITE);
+        panel1.add(usuario);
+
+        // Botones con colores vibrantes
+        JButton boton = new JButton("Acceder");
+        boton.setBounds(220, 270, 170, 50);
+        boton.setFont(new Font("Arial", Font.BOLD, 18));
+        boton.setBackground(new Color(40, 167, 69)); // Verde (#28a745)
+        boton.setForeground(Color.WHITE);
+        boton.setFocusPainted(false);
+        
+        boton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean flag1 = false, flag2 = false;
+                
+                if(usuario.getText().equals("")) {
+                    usuario.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+                } else {
+                    usuario.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
+                    flag1 = true;
+                }
+                
+                String miContra = new String(contrasena.getPassword());
+                
+                if(miContra.equals("")) {
+                    contrasena.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+                } else {
+                    contrasena.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
+                    flag2 = true;
+                }
+                
+                if(flag1 && flag2) {
+                    if(usuario.getText().equals("octavio.uabcs.mx")) { 
+                        if(miContra.equals("contraseña123")) {
+                            JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+                    }
+                }
+            }
+        });
+        
+        panel1.add(boton);
+        
+        JButton irRegistro = new JButton("Ir a registro");
+        irRegistro.setBounds(220, 370, 170, 50);
+        irRegistro.setFont(new Font("Arial", Font.BOLD, 18));
+        irRegistro.setBackground(new Color(0, 130, 155)); // Azul turquesa (#00829B)
+        irRegistro.setForeground(Color.WHITE);
+        irRegistro.setFocusPainted(false);
+        
+        irRegistro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Lógica para ir a registro
+            }
+        });
+        
+        panel1.add(irRegistro);
+        
+        panel1.revalidate();
+        panel1.repaint();
+    }
+}
