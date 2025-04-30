@@ -159,20 +159,7 @@ public class AuthView {
     }
     
     public void register() {
-    	
-        JFrame ventana = new JFrame();
-        
-        ventana.setVisible(true);
-        ventana.setSize(930, 600);
-        ventana.setLocationRelativeTo(null); 
-        ventana.setTitle("Login"); 
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        ventana.setResizable(true); 
-        
-        JPanel panel2 = new JPanel();
-        ventana.add(panel2);
-    	
-    	
+    	JPanel panel2 = new JPanel();
 
 		panel2.setBackground(Color.decode("#adb5bd"));
 		panel2.setOpaque(true);
@@ -306,8 +293,7 @@ public class AuthView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
- 				ventana.dispose();
- 				AuthView.this.login();
+				
 				
 			}
 		});

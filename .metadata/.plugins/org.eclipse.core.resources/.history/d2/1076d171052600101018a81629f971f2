@@ -306,8 +306,7 @@ public class AuthView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
- 				ventana.dispose();
- 				AuthView.this.login();
+				
 				
 			}
 		});
