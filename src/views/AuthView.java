@@ -1,6 +1,9 @@
 package views;
 
 import javax.swing.JTextField;
+
+import models.AuthModel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -120,12 +123,12 @@ public class AuthView {
                 }
                 
                 if(flag1 && flag2) {
-                    if(usuario.getText().equals("octavio.uabcs.mx")) { 
-                        if(miContra.equals("contraseña123")) {
+                	
+                	AuthModel am = new AuthModel();
+                	boolean is_login = am.login(usuario.getText(), contrasena.getText());
+                	
+                    if(is_login) { 
                             JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
-                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario no encontrado");
                     }
