@@ -1,4 +1,4 @@
-Juan,Perez,juan@gmail.com,1234
+Juan,Perez,a,a
 Ana,Gomez,ana@gmail.com,5678
 Luis,Ramirez,luis@gmail.com,9012
 Carla,Fernandez,carla@gmail.com,3456

@@ -1,7 +1,8 @@
-package views;
+ package views;
 
 import javax.swing.JTextField;
 
+import controllers.HomeController;
 import models.AuthModel;
 
 import java.awt.event.ActionEvent;
@@ -129,6 +130,10 @@ public class AuthView {
                 	
                     if(is_login) { 
                             JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+                            ventana.dispose();
+    						HomeController hc = new HomeController();
+    						
+    						hc.home();
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario no encontrado");
                     }
