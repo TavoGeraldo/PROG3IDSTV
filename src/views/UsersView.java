@@ -17,11 +17,14 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import models.User;
+import models.UsersModel;
 
 public class UsersView {
+	
+	private UsersModel userModel;
 
 	public UsersView() {
-		
+		userModel = new UsersModel();
 	}
 	
 	
@@ -43,26 +46,35 @@ public class UsersView {
 		panel.setSize(1000, 600); 
 		
         
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("Nombre");
-        model.addColumn("Email");
-        model.addColumn("Rol");
-        model.addColumn("Teléfono");
-        
-        for (User usuario : usuarios) {
-            model.addRow(new Object[]{usuario.id, usuario.name,usuario.email,usuario.role,usuario.phone});
-        }
+		int x = 100;
+		for (Iterator iterator = usuarios.iterator(); iterator.hasNext();) {
+			User usuario = (User) iterator.next();
+			
+			JLabel user = new JLabel(usuario.name);
+			user.setForeground(new Color(0, 0, 0)); 
+			user.setBounds(50, x, 210, 26);
+			user.setHorizontalAlignment(JLabel.CENTER);
+			panel.add(user);
+			
+			JButton btnEliminar = new JButton("Eliminar " + usuario.id);
+		    btnEliminar.setBounds(260, x, 120, 25);
+		    btnEliminar.setBackground(Color.RED);
+		    btnEliminar.setForeground(Color.WHITE);
 
-       
-        JTable table = new JTable(model);
-        table.setEnabled(false); 
-  
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(50, 100, 800, 400);  
-
-        panel.add(scrollPane);  
-				 
+		    btnEliminar.addActionListener(e -> {
+		        if (userModel.delete(usuario.id)) {
+		            panel.remove(user);
+		            panel.remove(btnEliminar);
+		            panel.repaint();
+		            panel.revalidate();
+		        }
+		    });
+		    
+		    panel.add(btnEliminar);
+			
+			x+= 35;
+			 
+		} 
 		
 		ventana.add(panel);
 		ventana.setVisible(true);
