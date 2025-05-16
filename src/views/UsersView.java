@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import models.User;
 import models.UsersModel;
+import views.RegisterView;
 
 public class UsersView {
 	
@@ -44,6 +45,25 @@ public class UsersView {
 		panel.setLocation(0, 0);
 		panel.setLayout(null);
 		panel.setSize(1000, 600); 
+		
+		JButton NewUserButton = new JButton("Registrar usuario");
+		NewUserButton.setBounds(80, 30, 150, 25);
+		NewUserButton.setBackground(Color.BLUE);
+		NewUserButton.setForeground(Color.WHITE);
+		
+		
+		NewUserButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 ventana.dispose();
+				
+				RegisterView rvi = new RegisterView();
+				rvi.register();
+
+			}
+		});
+		
+		panel.add(NewUserButton);
 		
         
 		int x = 100;
@@ -74,7 +94,9 @@ public class UsersView {
 			
 			x+= 35;
 			 
-		} 
+		}
+		
+			
 		
 		ventana.add(panel);
 		ventana.setVisible(true);
