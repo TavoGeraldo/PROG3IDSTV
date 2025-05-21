@@ -115,6 +115,33 @@ public class UsersModel {
 	    }
 	    return false;
 	}
+	
+	public boolean edit(int id,String name, String email) {
+	    String query = "UPDATE users SET name = '" + name + "', email = '" + email + "' WHERE id = " + id;
+
+	    Connection conn = null;
+	    Statement stmt = null;
+
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test", "root", "sql12345");
+	        stmt = conn.createStatement();
+
+	        int rowsAffected = stmt.executeUpdate(query);
+	        return rowsAffected > 0; 
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (stmt != null) stmt.close();
+	            if (conn != null) conn.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return false;
+	}
  
 	
 }

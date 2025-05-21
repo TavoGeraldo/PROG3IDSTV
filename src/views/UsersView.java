@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import models.User;
@@ -65,37 +66,75 @@ public class UsersView {
 		
 		panel.add(NewUserButton);
 		
-        
-		int x = 100;
-		for (Iterator iterator = usuarios.iterator(); iterator.hasNext();) {
-			User usuario = (User) iterator.next();
+		 String[] columnas = { "ID", "Nombre", "Correo" };
+		 DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0);
+		 JTable tabla = new JTable(modeloTabla) {
+			 @Override
+			    public boolean isCellEditable(int row, int column) {
+			        return false; 
+			    }
+		 };
+		 
+		 
+		 JScrollPane scrollPane = new JScrollPane(tabla);
+		 scrollPane.setBounds(20, 60, 400, 200);
+		 panel.add(scrollPane);
+		
+		    
+		  for (User usuario : usuarios) {
+		        Object[] fila = { usuario.id, usuario.name, usuario.email };
+		        modeloTabla.addRow(fila);
+		    }  
 			
-			JLabel user = new JLabel(usuario.name);
-			user.setForeground(new Color(0, 0, 0)); 
-			user.setBounds(50, x, 210, 26);
-			user.setHorizontalAlignment(JLabel.CENTER);
-			panel.add(user);
 			
-			JButton btnEliminar = new JButton("Eliminar " + usuario.id);
-		    btnEliminar.setBounds(260, x, 120, 25);
+		
+		  JButton btnEliminar = new JButton("Eliminar seleccionado");
+		    btnEliminar.setBounds(240, 280, 180, 30);
 		    btnEliminar.setBackground(Color.RED);
 		    btnEliminar.setForeground(Color.WHITE);
-
-		    btnEliminar.addActionListener(e -> {
-		        if (userModel.delete(usuario.id)) {
-		            panel.remove(user);
-		            panel.remove(btnEliminar);
-		            panel.repaint();
-		            panel.revalidate();
-		        }
-		    });
+		    
+		    btnEliminar.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					int filaSeleccionada = tabla.getSelectedRow();
+			    	if (filaSeleccionada >= 0) {
+			    	    int idUsuario = (int) modeloTabla.getValueAt(filaSeleccionada, 0);
+			    	    if (userModel.delete(idUsuario)) {
+			    	        modeloTabla.removeRow(filaSeleccionada);
+			    	    }
+			    	}
+				}
+			});
 		    
 		    panel.add(btnEliminar);
-			
-			x+= 35;
-			 
-		}
-		
+		    
+		    JButton btnEditar = new JButton("Editar");
+		    btnEditar.setBounds(20, 280, 180, 30);
+		    btnEditar.setBackground(Color.darkGray);
+		    btnEditar.setForeground(Color.WHITE);
+		    
+		    btnEditar.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					 int filaSeleccionada = tabla.getSelectedRow();
+				        if (filaSeleccionada >= 0) {
+				            int idUsuario = (int) modeloTabla.getValueAt(filaSeleccionada, 0);
+				            String nombreActual = (String) modeloTabla.getValueAt(filaSeleccionada, 1);
+				            String correoActual = (String) modeloTabla.getValueAt(filaSeleccionada, 2);
+				            
+				            mostrarFormularioEdicion(idUsuario, nombreActual, correoActual, filaSeleccionada, modeloTabla);
+				        } else {
+				            System.out.println("Selecciona un usuario para editar.");
+				        }
+					
+				}
+			});
+		    
+		    panel.add(btnEditar);
 			
 		
 		ventana.add(panel);
@@ -103,5 +142,75 @@ public class UsersView {
 		ventana.repaint();
 		ventana.revalidate();
 	}
+	
+	private void mostrarFormularioEdicion(int id, String nombreActual, String correoActual, int fila, DefaultTableModel modelo) {
+	    JFrame Ventana = new JFrame("Editar Usuario");
+	    Ventana.setSize(930, 600);
+	    Ventana.setLayout(null);
+	    Ventana.setLocationRelativeTo(null);
+
+	    JLabel lblNombre = new JLabel("Nombre:");
+	    lblNombre.setBounds(50, 50, 100, 25);
+	    Ventana.add(lblNombre);
+	    
+	    JTextField txtNombre = new JTextField(nombreActual);
+	    txtNombre.setBounds(150, 50, 225, 25);
+	    Ventana.add(txtNombre);
+
+	    JLabel lblCorreo = new JLabel("Correo:");
+	    lblCorreo.setBounds(50, 100, 100, 25);
+	    Ventana.add(lblCorreo);
+	    
+	    JTextField txtCorreo = new JTextField(correoActual);
+	    txtCorreo.setBounds(150, 100, 225, 25);
+	    Ventana.add(txtCorreo);
+
+	    JButton btnGuardar = new JButton("Guardar");
+	    btnGuardar.setBounds(90, 170, 100, 30);
+	    btnGuardar.setBackground(Color.GREEN);
+	    btnGuardar.setForeground(Color.WHITE);
+	    
+	    btnGuardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String nuevoNombre = txtNombre.getText();
+		        String nuevoCorreo = txtCorreo.getText();
+
+		        
+		        boolean actualizado = userModel.edit(id, nuevoNombre, nuevoCorreo);
+		           
+		        modelo.setValueAt(nuevoNombre, fila, 1);
+		        modelo.setValueAt(nuevoCorreo, fila, 2);
+		        Ventana.dispose();
+		        
+				
+			}
+		});
+	    
+	    Ventana.add(btnGuardar);
+	    
+	    JButton btnCancelar = new JButton("Cancelar");
+	    btnCancelar.setBounds(250, 170, 100, 30);
+	    btnCancelar.setBackground(Color.RED);
+	    btnCancelar.setForeground(Color.WHITE);
+	    btnCancelar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Ventana.dispose();
+			}
+		});
+	    Ventana.add(btnCancelar);
+
+
+	    Ventana.setVisible(true);
+		Ventana.repaint();
+		Ventana.revalidate();
+	    
+	}
+
 
 }
